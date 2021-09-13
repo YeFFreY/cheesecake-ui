@@ -119,6 +119,53 @@
           }
         }
       }
+    },
+    "test-mock": {
+      "root": "libs/test/mock",
+      "sourceRoot": "libs/test/mock/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/test/mock/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/test/mock"],
+          "options": {
+            "jestConfig": "libs/test/mock/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-shell": {
+      "projectType": "library",
+      "root": "libs/ui/shell",
+      "sourceRoot": "libs/ui/shell/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/shell"],
+          "options": {
+            "jestConfig": "libs/ui/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui/shell/src/**/*.ts",
+              "libs/ui/shell/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
