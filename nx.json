@@ -33,6 +33,12 @@
     "cheesecake-web-e2e": {
       "tags": [],
       "implicitDependencies": ["cheesecake-web"]
+    },
+    "test-mock": {
+      "tags": ["type:test"]
+    },
+    "ui-shell": {
+      "tags": ["type:ui"]
     }
   }
 }
