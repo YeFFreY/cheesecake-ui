@@ -36,5 +36,5 @@ jobs:
       - name: Build Project
         run: npx nx build
         
-      - name: Build Project
-        run: npx nx build
+      - name: Lint Project
+        run: npx nx run-many --all --target=lint
