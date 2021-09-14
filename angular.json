@@ -120,6 +120,31 @@
         }
       }
     },
+    "features-home": {
+      "projectType": "library",
+      "root": "libs/features/home",
+      "sourceRoot": "libs/features/home/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/home"],
+          "options": {
+            "jestConfig": "libs/features/home/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/home/src/**/*.ts",
+              "libs/features/home/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "test-mock": {
       "root": "libs/test/mock",
       "sourceRoot": "libs/test/mock/src",

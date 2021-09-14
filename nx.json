@@ -34,6 +34,9 @@
       "tags": [],
       "implicitDependencies": ["cheesecake-web"]
     },
+    "features-home": {
+      "tags": ["type:feature"]
+    },
     "test-mock": {
       "tags": ["type:test"]
     },
