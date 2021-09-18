@@ -3,12 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Route } from '@angular/router';
 import { HomeComponent } from './home.component';
 
-export const featuresHomeRoutes: Route[] = [];
+const featuresHomeRoutes: Route[] = [{ path: '', component: HomeComponent }];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild([
-    { path: '', component: HomeComponent }
-  ])],
+  imports: [CommonModule, RouterModule.forChild(featuresHomeRoutes)],
   declarations: [
     HomeComponent
   ]

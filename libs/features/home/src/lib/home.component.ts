@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'cc-home',
@@ -8,7 +8,8 @@ import { Component } from '@angular/core';
       <p>Sign in / Sign up</p>
     </div>
   `,
-  styles: []
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
 

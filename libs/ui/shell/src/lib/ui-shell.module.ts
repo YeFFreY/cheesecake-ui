@@ -7,7 +7,11 @@ import { ApplicationLayoutComponent } from './components/application-layout/appl
 export const uiShellRoutes: Route[] = [
   {
     path: '', component: GuestLayoutComponent, children: [
-      { path: '', loadChildren: async () => (await import('@cheesecake-ui/features/home')).FeaturesHomeModule }
+      { path: '', loadChildren: async () => (await import('@cheesecake-ui/features/home')).FeaturesHomeModule },
+      {
+        path: 'login',
+        loadChildren: async () => (await import('@cheesecake-ui/features/auth/login')).FeaturesAuthLoginModule
+      }
     ]
   },
   {
