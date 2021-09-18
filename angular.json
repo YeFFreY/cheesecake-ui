@@ -120,6 +120,56 @@
         }
       }
     },
+    "core-auth": {
+      "projectType": "library",
+      "root": "libs/core/auth",
+      "sourceRoot": "libs/core/auth/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/auth"],
+          "options": {
+            "jestConfig": "libs/core/auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/core/auth/src/**/*.ts",
+              "libs/core/auth/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "features-auth-login": {
+      "projectType": "library",
+      "root": "libs/features/auth/login",
+      "sourceRoot": "libs/features/auth/login/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/auth/login"],
+          "options": {
+            "jestConfig": "libs/features/auth/login/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/auth/login/src/**/*.ts",
+              "libs/features/auth/login/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "features-home": {
       "projectType": "library",
       "root": "libs/features/home",

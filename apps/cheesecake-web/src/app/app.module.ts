@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { UiShellModule } from '@cheesecake-ui/ui/shell';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreAuthModule } from '@cheesecake-ui/core-auth';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, UiShellModule],
+  imports: [BrowserModule, HttpClientModule, CoreAuthModule, UiShellModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
