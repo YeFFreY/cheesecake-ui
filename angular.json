@@ -120,6 +120,31 @@
         }
       }
     },
+    "core-api": {
+      "projectType": "library",
+      "root": "libs/core/api",
+      "sourceRoot": "libs/core/api/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/api"],
+          "options": {
+            "jestConfig": "libs/core/api/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/core/api/src/**/*.ts",
+              "libs/core/api/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "core-auth": {
       "projectType": "library",
       "root": "libs/core/auth",

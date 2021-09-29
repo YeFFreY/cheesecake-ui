@@ -34,6 +34,9 @@
       "tags": [],
       "implicitDependencies": ["cheesecake-web"]
     },
+    "core-api": {
+      "tags": ["type:core"]
+    },
     "core-auth": {
       "tags": ["type:core"]
     },

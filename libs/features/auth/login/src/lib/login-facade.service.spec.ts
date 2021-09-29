@@ -2,33 +2,31 @@ import { TestBed } from '@angular/core/testing';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 
 import { LoginFacadeService } from './login-facade.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AuthStateService } from '@cheesecake-ui/core-auth';
+import { of, throwError } from 'rxjs';
+import { ApiService, invalidRequest } from '@cheesecake-ui/core/api';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 describe('LoginFacadeService', () => {
   let service: LoginFacadeService;
   let authState: AuthStateService;
-  let http: HttpTestingController;
-
+  const api = { sendQuery: jest.fn(), sendCommand: jest.fn() };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule
-      ],
+      imports: [],
       providers: [
+        {
+          provide: ApiService,
+          useValue: api
+        },
         LoginFacadeService,
         AuthStateService
       ]
     });
     service = TestBed.inject(LoginFacadeService);
-    http = TestBed.inject(HttpTestingController);
     authState = TestBed.inject(AuthStateService);
-  });
-
-  afterEach(() => {
-    http.verify();
   });
 
   it('should be created', () => {
@@ -39,12 +37,25 @@ describe('LoginFacadeService', () => {
     const signedInFn = jest.spyOn(authState, 'signedIn');
     const vmSpy = subscribeSpyTo(service.vm$);
 
+    api.sendCommand = jest.fn(() => of({}))
+
     service.updateCredentials({ email: 'a.b@c.d', password: 'password'});
     service.submit();
 
-    http.expectOne('https://reqres.in/api/login').flush({});
-
-    expect(vmSpy.getValues()).toEqual([{ authenticated: false }, { authenticated: true }]);
+    expect(vmSpy.getValues()).toEqual([{ authenticated: false, errors: null }, { authenticated: true, errors: null }]);
     expect(signedInFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not mark as authenticated when invalid request returned', () => {
+    const signedInFn = jest.spyOn(authState, 'signedIn');
+    const vmSpy = subscribeSpyTo(service.vm$);
+
+    api.sendCommand = jest.fn(() => throwError(invalidRequest(new HttpErrorResponse({}))))
+
+    service.updateCredentials({ email: 'a.b@c.d', password: 'password'});
+    service.submit();
+
+    expect(vmSpy.getValues()).toEqual([{ authenticated: false, errors: null }, {authenticated: false, errors: 'invalid request'}]);
+    expect(signedInFn).toHaveBeenCalledTimes(0);
   });
 });
