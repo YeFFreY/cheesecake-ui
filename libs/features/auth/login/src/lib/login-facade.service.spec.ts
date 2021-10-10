@@ -6,6 +6,8 @@ import { AuthStateService } from '@cheesecake-ui/core-auth';
 import { of, throwError } from 'rxjs';
 import { ApiService, invalidRequest } from '@cheesecake-ui/core/api';
 import { HttpErrorResponse } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TestPlaceHolderComponent } from '@cheesecake-ui/test/mock';
 
 
 describe('LoginFacadeService', () => {
@@ -15,7 +17,7 @@ describe('LoginFacadeService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
+      imports: [RouterTestingModule.withRoutes([{ path: '', component: TestPlaceHolderComponent }, { path: 'app', component: TestPlaceHolderComponent }])],
       providers: [
         {
           provide: ApiService,
@@ -37,9 +39,9 @@ describe('LoginFacadeService', () => {
     const signedInFn = jest.spyOn(authState, 'signedIn');
     const vmSpy = subscribeSpyTo(service.vm$);
 
-    api.sendCommand = jest.fn(() => of({}))
+    api.sendCommand = jest.fn(() => of({}));
 
-    service.updateCredentials({ email: 'a.b@c.d', password: 'password'});
+    service.updateCredentials({ username: 'a.b@c.d', password: 'password' });
     service.submit();
 
     expect(vmSpy.getValues()).toEqual([{ authenticated: false, errors: null }, { authenticated: true, errors: null }]);
@@ -50,12 +52,15 @@ describe('LoginFacadeService', () => {
     const signedInFn = jest.spyOn(authState, 'signedIn');
     const vmSpy = subscribeSpyTo(service.vm$);
 
-    api.sendCommand = jest.fn(() => throwError(invalidRequest(new HttpErrorResponse({}))))
+    api.sendCommand = jest.fn(() => throwError(invalidRequest(new HttpErrorResponse({}))));
 
-    service.updateCredentials({ email: 'a.b@c.d', password: 'password'});
+    service.updateCredentials({ username: 'a.b@c.d', password: 'password' });
     service.submit();
 
-    expect(vmSpy.getValues()).toEqual([{ authenticated: false, errors: null }, {authenticated: false, errors: 'invalid request'}]);
+    expect(vmSpy.getValues()).toEqual([{ authenticated: false, errors: null }, {
+      authenticated: false,
+      errors: 'invalid request'
+    }]);
     expect(signedInFn).toHaveBeenCalledTimes(0);
   });
 });

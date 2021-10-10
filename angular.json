@@ -63,7 +63,8 @@
               "browserTarget": "cheesecake-web:build:production"
             },
             "development": {
-              "browserTarget": "cheesecake-web:build:development"
+              "browserTarget": "cheesecake-web:build:development",
+              "proxyConfig": "apps/cheesecake-web/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

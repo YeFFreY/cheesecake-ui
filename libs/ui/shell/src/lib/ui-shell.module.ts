@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Route, PreloadAllModules } from '@angular/router';
 import { GuestLayoutComponent } from './components/guest-layout/guest-layout.component';
 import { ApplicationLayoutComponent } from './components/application-layout/application-layout.component';
+import { HeaderComponent } from './components/header/header.component';
 
 export const uiShellRoutes: Route[] = [
   {
@@ -30,7 +31,8 @@ export const uiShellRoutes: Route[] = [
   exports: [RouterModule],
   declarations: [
     GuestLayoutComponent,
-    ApplicationLayoutComponent
+    ApplicationLayoutComponent,
+    HeaderComponent
   ]
 })
 export class UiShellModule {

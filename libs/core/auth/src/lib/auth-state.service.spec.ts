@@ -1,16 +1,23 @@
 import { TestBed } from '@angular/core/testing';
-import { TestScheduler } from 'rxjs/testing';
 
 import { AuthStateService } from './auth-state.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TestPlaceHolderComponent } from '@cheesecake-ui/test/mock';
+import { subscribeSpyTo } from '@hirez_io/observer-spy';
 
 describe('AuthStateService', () => {
   let service: AuthStateService;
-  let scheduler: TestScheduler;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([
+          { path: '', component: TestPlaceHolderComponent },
+          { path: 'app', component: TestPlaceHolderComponent }
+        ])
+      ]
+    });
     service = TestBed.inject(AuthStateService);
-    scheduler = new TestScheduler(((actual, expected) => expect(actual).toEqual(expected)));
   });
 
   it('should be created', () => {
@@ -18,25 +25,20 @@ describe('AuthStateService', () => {
   });
 
   it('should be initially not authenticated', () => {
-    scheduler.run(({ expectObservable }) => {
-      expectObservable(service.authenticated$).toBe('a', { a: false });
-    });
+    const authenticatedSpy = subscribeSpyTo(service.authenticated$);
+    expect(authenticatedSpy.getValues()).toEqual([false]);
   });
 
   it('should signal authenticated as true when signed in', () => {
-    scheduler.run(({ cold, expectObservable }) => {
-      cold('a').subscribe(() => service.signedIn());
-      expectObservable(service.authenticated$).toBe('a', { a: true });
-    });
+    const authenticatedSpy = subscribeSpyTo(service.authenticated$);
+    service.signedIn();
+    expect(authenticatedSpy.getValues()).toEqual([false, true]);
   });
 
   it('should signal authenticated as false after signing out', () => {
-    scheduler.run(({ cold, expectObservable }) => {
-      const actions: { [key: string]: () => void } = { a: () => service.signedIn(), b: () => service.signedOut() };
-      cold('ab').subscribe(v => {
-        actions[v]();
-      });
-      expectObservable(service.authenticated$).toBe('ab', { a: true, b: false });
-    });
+    const authenticatedSpy = subscribeSpyTo(service.authenticated$);
+    service.signedIn();
+    service.signedOut();
+    expect(authenticatedSpy.getValues()).toEqual([false, true, false]);
   });
 });

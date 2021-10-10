@@ -82,20 +82,21 @@ export function handleError(errorResponse: HttpErrorResponse): DataAccessError {
   }
 
 }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isError<T>(arg: any, type: string): arg is T {
   return arg.type && arg.type === type;
 }
 
-const isInvalidRequest = (arg: unknown) => isError<InvalidRequest>(arg, 'InvalidRequest');
+const isInvalidRequest = (arg: unknown): boolean => isError<InvalidRequest>(arg, 'InvalidRequest');
+const isAuthenticationError = (arg: unknown): boolean => isError<AuthenticationError>(arg, 'AuthenticationError');
 
-export function handleInvalidRequest(callback: (errorData: unknown) => void) {
-  return (error: unknown): Observable<never> => {
-    if (isInvalidRequest(error)) {
-      callback(error);
-      return EMPTY;
-    } else {
-      return throwError(error);
-    }
-  };
-}
+const handleResponseError = (handler: ((arg: unknown) => boolean)) => (callback: (errorData: unknown) => void) => (error: unknown): Observable<never> => {
+  if (handler(error)) {
+    callback(error);
+    return EMPTY;
+  } else {
+    return throwError(error);
+  }
+};
+export const handleAuthenticationError = handleResponseError(isAuthenticationError);
+export const handleInvalidRequest = handleResponseError(isInvalidRequest);

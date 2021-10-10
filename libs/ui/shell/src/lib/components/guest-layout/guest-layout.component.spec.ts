@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GuestLayoutComponent } from './guest-layout.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MockComponent } from 'ng-mocks';
+import { HeaderComponent } from '../header/header.component';
 
 describe('GuestLayoutComponent', () => {
   let component: GuestLayoutComponent;
@@ -9,7 +11,10 @@ describe('GuestLayoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports:[RouterTestingModule],
-      declarations: [GuestLayoutComponent]
+      declarations: [
+        MockComponent(HeaderComponent),
+        GuestLayoutComponent
+      ]
     })
       .compileComponents();
   });
@@ -24,8 +29,9 @@ describe('GuestLayoutComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have a router outlet', () => {
+  it('should have a router outlet and a header', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('router-outlet')).toBeDefined();
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
+    expect(compiled.querySelector('cc-header')).toBeTruthy();
   });
 });
