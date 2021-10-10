@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { LoginFormService } from './login-form.service';
 import { LoginFacadeService } from './login-facade.service';
-import { of } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -11,13 +8,13 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   selector: 'cc-login',
   template: `
 
-    <div *ngIf='(vm$ | async) as vm'>
+    <div *ngIf='(this.facade.vm$ | async) as vm'>
       <form [formGroup]='formService.form' id='loginForm' (ngSubmit)='facade.submit()'> <!-- container -->
         <div> <!-- padder -->
           <div> <!-- grid-->
             <div>
               <label for='email'>Email</label>
-              <input type='text' id='email' formControlName='email'>
+              <input type='text' id='username' formControlName='username'>
             </div>
             <div>
               <label for='password'>Password</label>
@@ -37,23 +34,14 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   providers: [LoginFormService]
 })
 export class LoginComponent implements OnInit {
-  vm$ = this.facade.vm$;
 
-  constructor(public formService: LoginFormService, public facade: LoginFacadeService, private router: Router) {
-    this.vm$.pipe(
-      map(vm => vm.authenticated),
-      filter(authenticated => authenticated),
-      untilDestroyed(this)
-    ).subscribe(() => router.navigate(['/']));
+  constructor(public formService: LoginFormService, public facade: LoginFacadeService) {
   }
 
   ngOnInit(): void {
-    this.formService.value$
+    this.formService.validValue$
       .pipe(untilDestroyed(this))
       .subscribe(value => this.facade.updateCredentials(value));
-
-    of({ email: 'eve.holt@reqres.in', password: 'cityslicka' })
-      .subscribe(value => this.formService.patch(value));
   }
 
 }

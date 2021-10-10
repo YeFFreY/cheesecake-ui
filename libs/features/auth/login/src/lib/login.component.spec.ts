@@ -36,21 +36,17 @@ describe('LoginComponent', () => {
 
   it('should display the form to login', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('#email')).toBeTruthy();
+    expect(compiled.querySelector('#username')).toBeTruthy();
     expect(compiled.querySelector('#password')).toBeTruthy();
     expect(compiled.querySelector('button[type="submit"]')).toBeTruthy();
-  });
-
-  it('should navigate to home page when VM says authenticated', () => {
-    expect(router.navigate).toBeCalledWith(['/']);
   });
 
   it('should wire the form data to the facade', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
-    const emailInput = compiled.querySelector('#email') as HTMLInputElement;
-    emailInput.value = 'a.b@c.b';
-    emailInput.dispatchEvent(new Event('input'));
+    const usernameInput = compiled.querySelector('#username') as HTMLInputElement;
+    usernameInput.value = 'a.b@c.b';
+    usernameInput.dispatchEvent(new Event('input'));
 
     const passwordInput = compiled.querySelector('#password') as HTMLInputElement;
     passwordInput.value = 'password';
@@ -60,7 +56,7 @@ describe('LoginComponent', () => {
     fixture.detectChanges()
 
     expect(facade.submit).toHaveBeenCalledTimes(1);
-    expect(facade.updateCredentials).toHaveBeenCalledWith({"email": "a.b@c.b", "password": "password"});
+    expect(facade.updateCredentials).toHaveBeenCalledWith({"username": "a.b@c.b", "password": "password"});
 
   })
 });

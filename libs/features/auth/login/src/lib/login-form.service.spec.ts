@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 
 import { LoginFormService } from './login-form.service';
-import { TestScheduler } from 'rxjs/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { subscribeSpyTo } from '@hirez_io/observer-spy';
 
 describe('LoginFormService', () => {
   let service: LoginFormService;
-  let scheduler: TestScheduler;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -14,7 +13,6 @@ describe('LoginFormService', () => {
       providers: [LoginFormService]
     });
     service = TestBed.inject(LoginFormService);
-    scheduler = new TestScheduler(((actual, expected) => expect(actual).toEqual(expected)));
   });
 
   it('should be created', () => {
@@ -22,18 +20,12 @@ describe('LoginFormService', () => {
   });
 
   it('should give only valid login form values', () => {
-    scheduler.run(({ cold, expectObservable }) => {
-      const inputs: { [key: string]: () => void } = {
-        a: () => service.patch({ email: '', password: '' }),
-        b: () => service.patch({ email: '', password: 'password' }),
-        c: () => service.patch({ email: 'a.b@c.d', password: '' }),
-        d: () => service.patch({ email: 'a.b@c.d', password: 'password' }),
-        e: () => service.patch({ email: '', password: '' })
-      };
-      cold('abcd').subscribe(v => {
-        inputs[v]();
-      });
-      expectObservable(service.value$).toBe('---d', { d: { email: 'a.b@c.d', password: 'password' } });
-    });
+    const serviceSpy = subscribeSpyTo(service.validValue$);
+    service.patch({ username: '', password: '' });
+    service.patch({ username: '', password: 'password' });
+    service.patch({ username: 'a.b@c.d', password: '' });
+    service.patch({ username: 'a.b@c.d', password: 'password' });
+    service.patch({ username: '', password: '' });
+    expect(serviceSpy.getValues()).toEqual([{ username: 'a.b@c.d', password: 'password' }]);
   });
 });

@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { catchError, map, sample, switchMap } from 'rxjs/operators';
 import { AuthStateService } from '@cheesecake-ui/core-auth';
-import { ApiService, handleInvalidRequest, Resource } from '@cheesecake-ui/core/api';
+import { ApiService, handleAuthenticationError, handleInvalidRequest, Resource } from '@cheesecake-ui/core/api';
 
 
 export interface Credentials {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -46,11 +46,15 @@ export class LoginFacadeService {
   }
 
   private login(credentials: Credentials) {
-    return this.api.sendCommand<Resource>('https://reqres.in/api/login', credentials)
+    return this.api.sendCommand<Resource>('auth/login', credentials)
       .pipe(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         catchError(handleInvalidRequest((_errorData) => {
-          this.errorsSubject.next('invalid request')
+          this.errorsSubject.next('invalid request');
+        })),
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        catchError(handleAuthenticationError((_errorData) => {
+          this.errorsSubject.next('unknown credentials');
         }))
       );
   }

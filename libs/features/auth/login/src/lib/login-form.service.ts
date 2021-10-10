@@ -9,19 +9,19 @@ export class LoginFormService {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      email: ['bob@bob.com', Validators.required],
+      username: ['bob@bob.com', Validators.required],
       password: ['secret77', Validators.required]
     });
   }
 
-  get value$(): Observable<{ email: string, password: string}> {
+  get validValue$(): Observable<{ username: string, password: string}> {
     return this.form.valueChanges.pipe(
       filter(() => this.form.valid),
     )
 
   }
 
-  patch(value: { password: string; email: string }) {
+  patch(value: { password: string; username: string }) {
     this.form.patchValue(value);
   }
 }
