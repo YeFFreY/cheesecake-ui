@@ -51,6 +51,9 @@
     },
     "ui-shell": {
       "tags": ["type:ui"]
+    },
+    "utils-form": {
+      "tags": ["type:util"]
     }
   }
 }
