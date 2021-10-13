@@ -267,6 +267,31 @@
           }
         }
       }
+    },
+    "utils-form": {
+      "projectType": "library",
+      "root": "libs/utils/form",
+      "sourceRoot": "libs/utils/form/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/utils/form"],
+          "options": {
+            "jestConfig": "libs/utils/form/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/utils/form/src/**/*.ts",
+              "libs/utils/form/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

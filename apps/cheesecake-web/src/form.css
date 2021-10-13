@@ -1,0 +1,4 @@
+/* Class used to style the error displayed below input field */
+.control-error {
+  color: red;
+}

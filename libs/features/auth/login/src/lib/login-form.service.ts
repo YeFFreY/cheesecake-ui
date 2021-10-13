@@ -1,27 +1,26 @@
-import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { CheeseValidators, FormService } from '@cheesecake-ui/utils/form';
+import { Credentials } from './login.domain';
 
-@Injectable()
-export class LoginFormService {
-  public form: FormGroup;
+export class LoginFormService implements FormService<Credentials> {
+  public readonly form: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      username: ['bob@bob.com', Validators.required],
-      password: ['secret77', Validators.required]
+      username: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, CheeseValidators.notEmpty, Validators.minLength(8)]]
     });
   }
 
-  get validValue$(): Observable<{ username: string, password: string}> {
+  get validValue$(): Observable<Credentials> {
     return this.form.valueChanges.pipe(
-      filter(() => this.form.valid),
-    )
-
+      filter(() => this.form.valid)
+    );
   }
 
-  patch(value: { password: string; username: string }) {
+  patch(value: Credentials) {
     this.form.patchValue(value);
   }
 }

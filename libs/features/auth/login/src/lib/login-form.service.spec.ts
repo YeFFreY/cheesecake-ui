@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { LoginFormService } from './login-form.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 
 describe('LoginFormService', () => {
@@ -10,9 +10,8 @@ describe('LoginFormService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
-      providers: [LoginFormService]
     });
-    service = TestBed.inject(LoginFormService);
+    service = new LoginFormService(TestBed.inject(FormBuilder));
   });
 
   it('should be created', () => {

@@ -1,66 +1,45 @@
-import { TestBed } from '@angular/core/testing';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 
 import { LoginFacadeService } from './login-facade.service';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator/jest';
+import { ApiService, AuthenticationError } from '@cheesecake-ui/core/api';
 import { AuthStateService } from '@cheesecake-ui/core-auth';
+import { ReactiveFormsModule } from '@angular/forms';
 import { of, throwError } from 'rxjs';
-import { ApiService, invalidRequest } from '@cheesecake-ui/core/api';
-import { HttpErrorResponse } from '@angular/common/http';
-import { RouterTestingModule } from '@angular/router/testing';
-import { TestPlaceHolderComponent } from '@cheesecake-ui/test/mock';
 
 
 describe('LoginFacadeService', () => {
-  let service: LoginFacadeService;
-  let authState: AuthStateService;
-  const api = { sendQuery: jest.fn(), sendCommand: jest.fn() };
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([{ path: '', component: TestPlaceHolderComponent }, { path: 'app', component: TestPlaceHolderComponent }])],
-      providers: [
-        {
-          provide: ApiService,
-          useValue: api
-        },
-        LoginFacadeService,
-        AuthStateService
-      ]
-    });
-    service = TestBed.inject(LoginFacadeService);
-    authState = TestBed.inject(AuthStateService);
+  let spectator: SpectatorService<LoginFacadeService>;
+  const createService = createServiceFactory({
+    service: LoginFacadeService,
+    imports: [ReactiveFormsModule],
+    mocks: [ApiService, AuthStateService]
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+  beforeEach(() => spectator = createService());
 
   it('should mark as authenticated when credentials received and submitted', () => {
-    const signedInFn = jest.spyOn(authState, 'signedIn');
-    const vmSpy = subscribeSpyTo(service.vm$);
+    const vmSpy = subscribeSpyTo(spectator.service.vm$);
+    spectator.inject(ApiService).sendCommand.andReturn(of({}));
 
-    api.sendCommand = jest.fn(() => of({}));
+    spectator.service.form.patchValue({ username: 'a.b@c.d', password: 'password' });
+    spectator.service.submit();
 
-    service.updateCredentials({ username: 'a.b@c.d', password: 'password' });
-    service.submit();
-
-    expect(vmSpy.getValues()).toEqual([{ authenticated: false, errors: null }, { authenticated: true, errors: null }]);
-    expect(signedInFn).toHaveBeenCalledTimes(1);
+    expect(vmSpy.getValues()).toEqual([{ error: null }]);
+    expect(spectator.inject(AuthStateService).signedIn).toHaveBeenCalledTimes(1);
   });
 
   it('should not mark as authenticated when invalid request returned', () => {
-    const signedInFn = jest.spyOn(authState, 'signedIn');
-    const vmSpy = subscribeSpyTo(service.vm$);
+    const vmSpy = subscribeSpyTo(spectator.service.vm$);
+    spectator.inject(ApiService).sendCommand.andCallFake(() => throwError({ type: 'AuthenticationError' } as AuthenticationError));
 
-    api.sendCommand = jest.fn(() => throwError(invalidRequest(new HttpErrorResponse({}))));
+    spectator.service.form.patchValue({ username: 'a.b@c.d', password: 'password' });
+    spectator.service.submit();
 
-    service.updateCredentials({ username: 'a.b@c.d', password: 'password' });
-    service.submit();
 
-    expect(vmSpy.getValues()).toEqual([{ authenticated: false, errors: null }, {
-      authenticated: false,
-      errors: 'invalid request'
+    expect(vmSpy.getValues()).toEqual([{ error: null }, {
+      error: { summary: 'AuthenticationError', errors: [] }
     }]);
-    expect(signedInFn).toHaveBeenCalledTimes(0);
+    expect(spectator.inject(AuthStateService).signedIn).toHaveBeenCalledTimes(0);
   });
 });

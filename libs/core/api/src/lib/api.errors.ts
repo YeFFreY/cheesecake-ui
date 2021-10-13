@@ -17,9 +17,11 @@ export interface NetworkError {
   readonly type: 'NetworkError';
 }
 
+export type InvalidRequestErrorItem = { path: string, message: string };
+
 export interface InvalidRequest {
   readonly type: 'InvalidRequest',
-  errors: unknown //TODO define type for errors
+  errors: InvalidRequestErrorItem[]
 }
 
 export interface UnrecoverableError {
@@ -57,7 +59,7 @@ const resourceNotFound = (): DataAccessError => ({ type: 'ResourceNotFound' });
 const networkError = (): DataAccessError => ({ type: 'NetworkError' });
 export const invalidRequest = (response: HttpErrorResponse): DataAccessError => ({
   type: 'InvalidRequest',
-  errors: response.error
+  errors: response.error.errors
 });
 const unRecoverableError = (): DataAccessError => ({ type: 'UnrecoverableError' });
 
@@ -82,6 +84,7 @@ export function handleError(errorResponse: HttpErrorResponse): DataAccessError {
   }
 
 }
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isError<T>(arg: any, type: string): arg is T {
   return arg.type && arg.type === type;
@@ -90,7 +93,7 @@ function isError<T>(arg: any, type: string): arg is T {
 const isInvalidRequest = (arg: unknown): boolean => isError<InvalidRequest>(arg, 'InvalidRequest');
 const isAuthenticationError = (arg: unknown): boolean => isError<AuthenticationError>(arg, 'AuthenticationError');
 
-const handleResponseError = (handler: ((arg: unknown) => boolean)) => (callback: (errorData: unknown) => void) => (error: unknown): Observable<never> => {
+const handleResponseError = <T>(handler: ((arg: unknown) => boolean)) => (callback: (errorData: T) => void) => (error: T): Observable<never> => {
   if (handler(error)) {
     callback(error);
     return EMPTY;
@@ -98,5 +101,5 @@ const handleResponseError = (handler: ((arg: unknown) => boolean)) => (callback:
     return throwError(error);
   }
 };
-export const handleAuthenticationError = handleResponseError(isAuthenticationError);
-export const handleInvalidRequest = handleResponseError(isInvalidRequest);
+export const handleAuthenticationError = handleResponseError<AuthenticationError>(isAuthenticationError);
+export const handleInvalidRequest = handleResponseError<InvalidRequest>(isInvalidRequest);

@@ -1,15 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { LoginFormService } from './login-form.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LoginFacadeService } from './login-facade.service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-@UntilDestroy()
+
 @Component({
   selector: 'cc-login',
   template: `
 
     <div *ngIf='(this.facade.vm$ | async) as vm'>
-      <form [formGroup]='formService.form' id='loginForm' (ngSubmit)='facade.submit()'> <!-- container -->
+      <form [formGroup]='facade.form' id='loginForm' (ngSubmit)='facade.submit()' errorTailor>
+        <!-- container -->
         <div> <!-- padder -->
           <div> <!-- grid-->
             <div>
@@ -23,25 +22,20 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
           </div>
         </div>
         <div>
-          <button type='submit'>Sign in</button>
+          <div>{{vm.error?.summary}}</div>
+          <div>
+            <button type='submit'>Sign in</button>
+          </div>
         </div>
-        <pre>{{vm | json}}</pre>
       </form>
     </div>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [LoginFormService]
+  providers: [LoginFacadeService]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  constructor(public formService: LoginFormService, public facade: LoginFacadeService) {
+  constructor(public facade: LoginFacadeService) {
   }
-
-  ngOnInit(): void {
-    this.formService.validValue$
-      .pipe(untilDestroyed(this))
-      .subscribe(value => this.facade.updateCredentials(value));
-  }
-
 }

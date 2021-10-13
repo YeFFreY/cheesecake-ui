@@ -22,7 +22,8 @@
       ],
       "@cheesecake-ui/features/home": ["libs/features/home/src/index.ts"],
       "@cheesecake-ui/test/mock": ["libs/test/mock/src/index.ts"],
-      "@cheesecake-ui/ui/shell": ["libs/ui/shell/src/index.ts"]
+      "@cheesecake-ui/ui/shell": ["libs/ui/shell/src/index.ts"],
+      "@cheesecake-ui/utils/form": ["libs/utils/form/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

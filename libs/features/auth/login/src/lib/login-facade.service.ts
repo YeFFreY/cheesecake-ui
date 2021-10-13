@@ -1,37 +1,43 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { catchError, map, sample, switchMap } from 'rxjs/operators';
 import { AuthStateService } from '@cheesecake-ui/core-auth';
-import { ApiService, handleAuthenticationError, handleInvalidRequest, Resource } from '@cheesecake-ui/core/api';
+import {
+  ApiService,
+  handleAuthenticationError,
+  handleInvalidRequest,
+  InvalidRequestErrorItem,
+  Resource
+} from '@cheesecake-ui/core/api';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { LoginFormService } from './login-form.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Credentials } from './login.domain';
 
 
-export interface Credentials {
-  username: string;
-  password: string;
-}
-
-@Injectable({
-  providedIn: 'root'
-})
+@UntilDestroy()
+@Injectable()
 export class LoginFacadeService {
 
-  private credentialsSubject = new Subject<Credentials>();
-  private errorsSubject = new BehaviorSubject<string | null>(null);
   private submitSubject = new BehaviorSubject<boolean>(false);
+  private errorsSubject = new BehaviorSubject<{ summary: string, errors: InvalidRequestErrorItem[] } | null>(null);
 
-  private credentials$ = this.credentialsSubject.asObservable();
-  private errors$ = this.errorsSubject.asObservable();
   private submit$: Observable<boolean> = this.submitSubject.asObservable();
-  private authenticated$ = this.authState.authenticated$;
+  private errors$ = this.errorsSubject.asObservable();
 
-  public vm$ = combineLatest(this.authenticated$, this.errors$).pipe(
-    map(([authenticated, errors]) => ({ authenticated, errors }))
+  public vm$ = combineLatest(this.errors$).pipe(
+    map(([error]) => ({ error }))
   );
 
-  constructor(private api: ApiService, private authState: AuthStateService) {
-    this.credentials$.pipe(
+  private formService: LoginFormService;
+
+  constructor(private api: ApiService, private authState: AuthStateService, private fb: FormBuilder) {
+    this.formService = new LoginFormService(fb);
+
+    this.formService.validValue$.pipe(
       sample(this.submit$),
-      switchMap(credentials => this.login(credentials))
+      switchMap(credentials => this.login(credentials)),
+      untilDestroyed(this)
     ).subscribe(() => {
       this.authState.signedIn();
     });
@@ -41,20 +47,18 @@ export class LoginFacadeService {
     this.submitSubject.next(true);
   }
 
-  public updateCredentials(credentials: Credentials) {
-    this.credentialsSubject.next(credentials);
+  get form(): FormGroup {
+    return this.formService.form;
   }
 
   private login(credentials: Credentials) {
     return this.api.sendCommand<Resource>('auth/login', credentials)
       .pipe(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        catchError(handleInvalidRequest((_errorData) => {
-          this.errorsSubject.next('invalid request');
+        catchError(handleInvalidRequest((errorData) => {
+          this.errorsSubject.next({ summary: errorData.type, errors: errorData.errors });
         })),
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        catchError(handleAuthenticationError((_errorData) => {
-          this.errorsSubject.next('unknown credentials');
+        catchError(handleAuthenticationError((errorData) => {
+          this.errorsSubject.next({ summary: errorData.type, errors: [] });
         }))
       );
   }
