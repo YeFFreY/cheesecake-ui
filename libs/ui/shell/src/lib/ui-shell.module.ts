@@ -4,6 +4,7 @@ import { RouterModule, Route, PreloadAllModules } from '@angular/router';
 import { GuestLayoutComponent } from './components/guest-layout/guest-layout.component';
 import { ApplicationLayoutComponent } from './components/application-layout/application-layout.component';
 import { HeaderComponent } from './components/header/header.component';
+import { AuthenticatedGuard } from '@cheesecake-ui/core-auth';
 
 export const uiShellRoutes: Route[] = [
   {
@@ -16,7 +17,10 @@ export const uiShellRoutes: Route[] = [
     ]
   },
   {
-    path: 'app', component: ApplicationLayoutComponent
+    path: 'app', component: ApplicationLayoutComponent,
+    canLoad:[AuthenticatedGuard],
+    canActivate:[AuthenticatedGuard],
+    loadChildren: async () => (await import('@cheesecake-ui/ui/application-shell')).UiApplicationShellModule
   }
 ];
 

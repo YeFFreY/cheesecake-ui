@@ -1,17 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'cc-home',
+  selector: 'cc-deleteme',
   template: `
     <div>
-      <h1>Welcome to CheeseCake !</h1>
-      <p>Sign in / Sign up</p>
-      <a routerLink='/app'>App !</a>
+      <p>deleteme</p>
     </div>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent {
+export class DeletemeComponent {
 
 }

@@ -1,45 +1,30 @@
-import { TestBed } from '@angular/core/testing';
-
 import { HeaderFacadeService } from './header-facade.service';
 import { ApiService } from '@cheesecake-ui/core/api';
-import { AuthStateService } from '@cheesecake-ui/core-auth';
+import { SessionService } from '@cheesecake-ui/core-auth';
 import { of } from 'rxjs';
+import { createServiceFactory, mockProvider, SpectatorService } from '@ngneat/spectator/jest';
+import { Router } from '@angular/router';
 
 describe('HeaderFacadeService', () => {
-  let service: HeaderFacadeService;
-  const authState = { signedOut: jest.fn() };
-  const api = { sendQuery: jest.fn(), sendCommand: jest.fn(() => of({})) };
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        {
-          provide: ApiService,
-          useValue: api
-        },
-        {
-          provide: AuthStateService,
-          useValue: authState
-        },
-        HeaderFacadeService,
-
-      ]
-    });
-    service = TestBed.inject(HeaderFacadeService);
+  let spectator: SpectatorService<HeaderFacadeService>;
+  const createService = createServiceFactory({
+    service: HeaderFacadeService,
+    providers: [
+      mockProvider(ApiService, {
+        sendCommand: () => of({})
+      }),
+      mockProvider(SessionService),
+      mockProvider(Router)
+    ]
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+  beforeEach(() => spectator = createService());
 
   it('should send command and call signout when calling logout', () => {
-    const signedOutFn = jest.spyOn(authState, 'signedOut');
-    const commandFn = jest.spyOn(api, 'sendCommand');
+    spectator.service.logout();
 
-    service.logout();
-
-    expect(signedOutFn).toHaveBeenCalledTimes(1);
-    expect(commandFn).toHaveBeenCalledTimes(1);
+    expect(spectator.inject(SessionService).signedOut).toHaveBeenCalledTimes(1);
+    expect(spectator.inject(Router).navigate).toHaveBeenCalledTimes(1);
 
   });
 });

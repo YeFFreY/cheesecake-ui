@@ -2,16 +2,18 @@ import { LoginComponent } from './login.component';
 import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
 import { LoginFacadeService } from './login-facade.service';
 import { ApiService } from '@cheesecake-ui/core/api';
-import { AuthStateService } from '@cheesecake-ui/core-auth';
+import { SessionService } from '@cheesecake-ui/core-auth';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LoginComponent', () => {
   let spectator: Spectator<LoginComponent>;
   const createComponent = createComponentFactory({
     component: LoginComponent,
-    imports:[ReactiveFormsModule],
+    imports:[ReactiveFormsModule, RouterTestingModule],
     componentProviders:[LoginFacadeService],
-    componentMocks: [ApiService, AuthStateService]
+    mocks: [ApiService, SessionService, ActivatedRoute]
   });
 
   beforeEach(() => spectator = createComponent());

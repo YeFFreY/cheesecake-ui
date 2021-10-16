@@ -49,6 +49,9 @@
     "test-mock": {
       "tags": ["type:test"]
     },
+    "ui-application-shell": {
+      "tags": ["type:ui"]
+    },
     "ui-shell": {
       "tags": ["type:ui"]
     },

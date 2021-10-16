@@ -1,11 +1,12 @@
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 
 import { LoginFacadeService } from './login-facade.service';
-import { createServiceFactory, SpectatorService } from '@ngneat/spectator/jest';
+import { createServiceFactory, mockProvider, SpectatorService } from '@ngneat/spectator/jest';
 import { ApiService, AuthenticationError } from '@cheesecake-ui/core/api';
-import { AuthStateService } from '@cheesecake-ui/core-auth';
+import { SessionService } from '@cheesecake-ui/core-auth';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of, throwError } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 describe('LoginFacadeService', () => {
@@ -13,7 +14,13 @@ describe('LoginFacadeService', () => {
   const createService = createServiceFactory({
     service: LoginFacadeService,
     imports: [ReactiveFormsModule],
-    mocks: [ApiService, AuthStateService]
+    mocks: [ApiService, SessionService],
+    providers: [
+      mockProvider(Router),
+      mockProvider(ActivatedRoute, {
+        snapshot: { queryParams: { redirect: '/bob' } }
+      })
+    ]
   });
 
   beforeEach(() => spectator = createService());
@@ -26,7 +33,9 @@ describe('LoginFacadeService', () => {
     spectator.service.submit();
 
     expect(vmSpy.getValues()).toEqual([{ error: null }]);
-    expect(spectator.inject(AuthStateService).signedIn).toHaveBeenCalledTimes(1);
+    expect(spectator.inject(SessionService).signedIn).toHaveBeenCalledTimes(1);
+    expect(spectator.inject(Router).navigate).toHaveBeenCalledTimes(1);
+    expect(spectator.inject(Router).navigate).toHaveBeenCalledWith(['/bob']);
   });
 
   it('should not mark as authenticated when invalid request returned', () => {
@@ -40,6 +49,7 @@ describe('LoginFacadeService', () => {
     expect(vmSpy.getValues()).toEqual([{ error: null }, {
       error: { summary: 'AuthenticationError', errors: [] }
     }]);
-    expect(spectator.inject(AuthStateService).signedIn).toHaveBeenCalledTimes(0);
+    expect(spectator.inject(SessionService).signedIn).not.toBeCalled();
+    expect(spectator.inject(Router).navigate).not.toBeCalled();
   });
 });
