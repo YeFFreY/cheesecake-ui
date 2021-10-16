@@ -243,6 +243,31 @@
         }
       }
     },
+    "ui-application-shell": {
+      "projectType": "library",
+      "root": "libs/ui/application-shell",
+      "sourceRoot": "libs/ui/application-shell/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/application-shell"],
+          "options": {
+            "jestConfig": "libs/ui/application-shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui/application-shell/src/**/*.ts",
+              "libs/ui/application-shell/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "ui-shell": {
       "projectType": "library",
       "root": "libs/ui/shell",

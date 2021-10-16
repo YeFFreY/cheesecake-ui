@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { catchError, map, sample, switchMap } from 'rxjs/operators';
-import { AuthStateService } from '@cheesecake-ui/core-auth';
+import { SessionService } from '@cheesecake-ui/core-auth';
 import {
   ApiService,
   handleAuthenticationError,
@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { LoginFormService } from './login-form.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Credentials } from './login.domain';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @UntilDestroy()
@@ -31,7 +32,7 @@ export class LoginFacadeService {
 
   private formService: LoginFormService;
 
-  constructor(private api: ApiService, private authState: AuthStateService, private fb: FormBuilder) {
+  constructor(private api: ApiService, private sessionService: SessionService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
     this.formService = new LoginFormService(fb);
 
     this.formService.validValue$.pipe(
@@ -39,7 +40,8 @@ export class LoginFacadeService {
       switchMap(credentials => this.login(credentials)),
       untilDestroyed(this)
     ).subscribe(() => {
-      this.authState.signedIn();
+      this.sessionService.signedIn();
+      this.router.navigate([this.route.snapshot.queryParams['redirect'] || '/app']);
     });
   }
 

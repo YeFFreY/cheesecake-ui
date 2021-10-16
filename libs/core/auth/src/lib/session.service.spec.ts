@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthStateService } from './auth-state.service';
+import { SessionService } from './session.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TestPlaceHolderComponent } from '@cheesecake-ui/test/mock';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 
-describe('AuthStateService', () => {
-  let service: AuthStateService;
+describe('SessionService', () => {
+  let service: SessionService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -17,7 +17,7 @@ describe('AuthStateService', () => {
         ])
       ]
     });
-    service = TestBed.inject(AuthStateService);
+    service = TestBed.inject(SessionService);
   });
 
   it('should be created', () => {

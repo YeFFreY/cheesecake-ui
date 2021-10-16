@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '@cheesecake-ui/core/api';
-import { AuthStateService } from '@cheesecake-ui/core-auth';
+import { SessionService } from '@cheesecake-ui/core-auth';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HeaderFacadeService {
-  constructor(private api: ApiService, private authState: AuthStateService) {
+  constructor(private api: ApiService, private sessionService: SessionService, private router: Router) {
   }
 
   get authenticated$() {
-    return this.authState.authenticated$
+    return this.sessionService.authenticated$
   }
 
   logout() {
     this.api.sendCommand<void>('auth/logout', {})
-      .subscribe(() => this.authState.signedOut());
+      .subscribe(() => {
+        this.sessionService.signedOut();
+        this.router.navigate(['/'])
+      });
   }
 }
