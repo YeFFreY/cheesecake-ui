@@ -40,6 +40,9 @@
     "core-auth": {
       "tags": ["type:core"]
     },
+    "features-activity-create": {
+      "tags": ["type:feature"]
+    },
     "features-auth-login": {
       "tags": ["type:feature"]
     },

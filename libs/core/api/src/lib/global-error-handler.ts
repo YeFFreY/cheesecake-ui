@@ -3,7 +3,7 @@ import { ErrorHandler, Injectable, Provider } from '@angular/core';
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
   handleError(error: unknown): void {
-    alert('Error from global error handler : ' +  JSON.stringify(error));
+    console.error('Error from global error handler : ' +  error);
   }
 }
 

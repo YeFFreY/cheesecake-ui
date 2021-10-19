@@ -5,7 +5,9 @@ import { DeletemeComponent } from './deleteme.component';
 
 export const uiApplicationShellRoutes: Route[] = [
   {
-    path: '', component: DeletemeComponent,
+    path: 'activities', children:[
+      { path: 'new', loadChildren: async() => (await import('@cheesecake-ui/features/activity/create')).FeaturesActivityCreateModule}
+    ]
   },
   {
     path: 'bob', component: DeletemeComponent
