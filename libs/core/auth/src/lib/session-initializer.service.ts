@@ -3,17 +3,20 @@ import { ApiService, handleAuthenticationError } from '@cheesecake-ui/core/api';
 import { SessionService } from './session.service';
 import { catchError } from 'rxjs/operators';
 
-function initializeSession(api:ApiService, sessionService: SessionService) {
+export function initializeSession(api: ApiService, sessionService: SessionService) {
   return () => {
-    new Promise<void>((resolve) => {
+    return new Promise<void>((resolve) => {
       api.sendQuery('/auth/session').pipe(
-        catchError(handleAuthenticationError(() => sessionService.signedOut()))
+        catchError(handleAuthenticationError(() => {
+          sessionService.signedOut();
+          resolve()
+        }))
       ).subscribe(() => {
         sessionService.signedIn();
-        resolve()
-      })
-    })
-  }
+        resolve();
+      });
+    });
+  };
 }
 
 export const sessionInitialize: Provider = {
