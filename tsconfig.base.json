@@ -17,6 +17,9 @@
     "paths": {
       "@cheesecake-ui/core-auth": ["libs/core/auth/src/index.ts"],
       "@cheesecake-ui/core/api": ["libs/core/api/src/index.ts"],
+      "@cheesecake-ui/features/activity/create": [
+        "libs/features/activity/create/src/index.ts"
+      ],
       "@cheesecake-ui/features/auth/login": [
         "libs/features/auth/login/src/index.ts"
       ],

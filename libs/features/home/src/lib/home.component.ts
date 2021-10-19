@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     <div>
       <h1>Welcome to CheeseCake !</h1>
       <p>Sign in / Sign up</p>
-      <a routerLink='/app'>App !</a>
+      <a routerLink='/app/activities/new'>New Activity</a>
     </div>
   `,
   styles: [],
