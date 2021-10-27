@@ -1,2 +1,6 @@
-@import "normalize.css";
-@import "form.css";
+@import "style/normalize.css";
+@import "style/spacing.css";
+@import "style/position.css";
+@import "style/colors.css";
+@import "style/typography.css";
+@import "style/form.css";

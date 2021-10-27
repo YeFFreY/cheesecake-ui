@@ -4,10 +4,22 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'cc-guest-layout',
   template: `
     <cc-header></cc-header>
-    <h1>Guest Layout</h1>
-    <router-outlet></router-outlet>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
   `,
-  styles: [],
+  styles: [`
+    :host {
+      display : grid;
+      grid-template-rows: max-content 1fr;
+      height  : 100%;
+    }
+
+    div {
+      width: 100%;
+      overflow-y: auto;
+    }
+  `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GuestLayoutComponent {

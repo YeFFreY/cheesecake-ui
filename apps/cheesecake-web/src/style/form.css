@@ -1,0 +1,61 @@
+.input {
+  border        : 1px solid var(--color-form-element-border);
+  padding       : var(--space-xs);
+  border-radius : var(--form-element-radius);
+}
+
+.input + label {
+  margin-top : var(--space-md);
+}
+
+.form-grid {
+  display  : grid;
+  grid-gap : var(--space-md);
+}
+
+.form-grid:first-child {
+  margin-top : var(--space-md);
+}
+
+.form-element {
+  display  : grid;
+  grid-gap : var(--space-xxs);
+}
+
+.form-footer {
+  display         : grid;
+  justify-content : right;
+  grid-gap        : var(--space-xs);
+  grid-auto-flow  : column;
+  margin-top      : var(--space-md);
+}
+
+
+button.button {
+  border : 1px solid var(--color-btn-primary-bg);
+}
+
+a.button {
+  text-decoration : none;
+}
+
+a.button, button.button {
+  background-color : var(--color-btn-primary-bg);
+  border-radius    : var(--form-element-radius);
+  color            : var(--color-btn-primary-label);
+  cursor           : pointer;
+  display          : inline-flex;
+  align-items      : center;
+  justify-content  : center;
+  padding          : var(--space-xs) var(--space-md);
+}
+
+label.control-error {
+  color       : var(--error);
+  font-size   : var(--text-sm);
+  font-weight : var(--font-weight-light);
+}
+
+form.ng-submitted .input.ng-invalid {
+  border : 1px solid var(--error);
+}
