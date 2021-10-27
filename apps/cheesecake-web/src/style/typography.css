@@ -1,0 +1,114 @@
+/*
+https://moderncss.dev/generating-font-size-css-rules-and-creating-a-fluid-type-scale/
+
+*/
+:root {
+  --font-primary       : 'Source Sans Pro', sans-serif;;
+
+  --font-line-height   : 1.5;
+
+  --font-weight-light  : 300;
+  --font-weight-normal : 400;
+  --font-weight-bold   : 600;
+
+  --text-base-size     : clamp(0.9rem, 1.5vw, 1.1rem);
+  --text-scale-ratio   : 1.2;
+
+  --text-xs            : calc(var(--text-base-size) / (var(--text-scale-ratio) * var(--text-scale-ratio)));
+  --text-sm            : calc(var(--text-base-size) / var(--text-scale-ratio));
+  --text-md            : calc(var(--text-base-size));
+  --text-lg            : calc(var(--text-base-size) * var(--text-scale-ratio));
+  --text-xl            : calc(var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xxl           : calc(var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xxxl          : calc(var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+
+
+}
+
+body {
+  font-size   : var(--text-md);
+  font-family : var(--font-primary);
+  font-weight: var(--font-weight-normal);
+  line-height : var(--font-line-height);
+  color       : var(--color-text);
+}
+
+h1, h2, h3, h4, p {
+  line-height   : calc(2px + 2ex + 2px);
+  margin-top    : 0;
+  margin-bottom : var(--space-xs);
+}
+
+h1, h2, h3, h4 {
+  color : var(--color-text-heading);
+}
+
+/* text size */
+.text--xxxl {
+  font-size : var(--text-xxxl);
+}
+
+h1, .text--xxl {
+  font-size : var(--text-xxl);
+}
+
+h2, .text--xl {
+  font-size : var(--text-xl);
+}
+
+h3, .text--lg {
+  font-size : var(--text-lg);
+}
+
+h4, .text--md {
+  font-size : var(--text-md);
+}
+
+.text--sm, small {
+  font-size : var(--text-sm);
+}
+
+.text--xs {
+  font-size : var(--text-xs);
+}
+
+p, li, h1, h2, h3, h4 {
+  overflow-wrap : break-word;
+  hyphens       : auto;
+}
+
+button, input, select, textarea {
+  font-family : inherit;
+  font-size   : var(--text-base-size);
+  color       : var(--color-text);
+}
+
+textarea {
+  line-height : inherit;
+  resize      : vertical;
+}
+
+label, button, input, select {
+  line-height : 1.25;
+}
+
+label {
+  font-weight : var(--font-weight-bold);
+}
+
+ul {
+  margin  : 0;
+  padding : 0;
+}
+
+a.unstyled {
+  text-decoration : none;
+  color           : var(--color-text);
+  cursor          : pointer;
+}
+
+img {
+  object-fit : cover;
+  max-width  : 100%;
+  height: auto;
+}

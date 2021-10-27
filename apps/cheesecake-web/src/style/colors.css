@@ -1,0 +1,61 @@
+:root {
+  /* https://htmlcolorcodes.com/color-chart/ */
+
+  --gray-100                     : hsl(210, 12%, 93%);
+  --gray-200                     : hsl(210, 12%, 86%);
+  --gray-200-alpha50             : hsla(210, 12%, 86%, 0.5);
+  --gray-300                     : hsl(210, 12%, 71%);
+  --gray-300-alpha50             : hsla(210, 12%, 71%, 0.5);
+  --gray-400                     : hsl(210, 12%, 57%);
+  --gray-400-alpha50             : hsla(210, 12%, 57%, 0.5);
+  --gray-500                     : hsl(210, 15%, 43%);
+  --gray-600                     : hsl(210, 29%, 29%);
+  --gray-600-alpha50             : hsla(210, 29%, 29%, 0.5);
+  --gray-600-alpha80             : hsla(210, 29%, 29%, 0.8);
+  --gray-700                     : hsl(210, 29%, 25%);
+  --gray-800                     : hsl(210, 29%, 22%);
+  --gray-900                     : hsl(210, 29%, 18%);
+  --gray-1000                    : hsl(210, 29%, 15%);
+
+  --white                        : hsl(0, 0%, 100%);
+  --white-50                     : hsla(0, 0%, 100%, 0.5);
+  --white-75                     : hsla(0, 0%, 100%, 0.75);
+
+  --pink-10                      : hsl(321, 71%, 23%);
+  --pink-6                       : hsl(322, 71%, 32%);
+  --pink-6-50                    : hsla(322, 71%, 32%, 0.5);
+  --pink-4                       : hsl(321, 71%, 42%);
+  --pink-3                       : hsl(321, 61%, 52%);
+  --pink-2                       : hsl(321, 61%, 62%);
+  --pink-1                       : hsl(321, 62%, 73%);
+
+  --error                        : hsl(0, 64%, 43%);
+
+  --color-primary                : var(--gray-600);
+  --color-primary-alpha50        : var(--gray-600-alpha50);
+  --color-primary-alpha80        : var(--gray-600-alpha80);
+  --color-focus-on-primary       : var(--gray-200-alpha50);
+
+  /* shadow */
+  --shadow-500                   : 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* typography */
+  --color-text                   : var(--gray-900);
+  --color-text-heading           : var(--gray-800);
+  --color-text-subtle            : var(--gray-700);
+
+  /* border */
+  --color-border                 : var(--gray-200);
+
+  /* forms */
+  --color-form-element-border    : var(--color-border);
+
+  /* buttons */
+  --color-btn-primary-bg         : var(--color-primary);
+  --color-btn-primary-label      : var(--white);
+
+  /* header */
+  --color-header-primary-bg      : var(--color-primary);
+  --color-header-primary-label   : var(--gray-100);
+  --color-header-secondary-label : var(--gray-200);
+
+}
