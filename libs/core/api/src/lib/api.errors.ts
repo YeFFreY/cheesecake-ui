@@ -97,9 +97,9 @@ const handleResponseError = <T>(handler: ((arg: unknown) => boolean)) => (callba
   if (handler(error)) {
     callback(error);
     return EMPTY;
-  } else {
-    return throwError(error);
   }
+  return throwError(error);
+
 };
 export const handleAuthenticationError = handleResponseError<AuthenticationError>(isAuthenticationError);
 export const handleInvalidRequest = handleResponseError<InvalidRequest>(isInvalidRequest);

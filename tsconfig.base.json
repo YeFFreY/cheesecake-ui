@@ -20,6 +20,9 @@
       "@cheesecake-ui/features/activity/create": [
         "libs/features/activity/create/src/index.ts"
       ],
+      "@cheesecake-ui/features/activity/list": [
+        "libs/features/activity/list/src/index.ts"
+      ],
       "@cheesecake-ui/features/auth/login": [
         "libs/features/auth/login/src/index.ts"
       ],

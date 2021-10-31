@@ -19,7 +19,7 @@ export const uiShellRoutes: Route[] = [
   {
     path: 'app', component: ApplicationLayoutComponent,
     canLoad:[AuthenticatedGuard],
-    canActivate:[AuthenticatedGuard],
+    canActivateChild:[AuthenticatedGuard],
     loadChildren: async () => (await import('@cheesecake-ui/ui/application-shell')).UiApplicationShellModule
   }
 ];

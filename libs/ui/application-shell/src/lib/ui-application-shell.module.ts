@@ -1,21 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Route } from '@angular/router';
-import { DeletemeComponent } from './deleteme.component';
+import { Route, RouterModule } from '@angular/router';
 
 export const uiApplicationShellRoutes: Route[] = [
+  { path: '', pathMatch: 'full', redirectTo: 'activities' },
   {
-    path: 'activities', children:[
-      { path: 'new', loadChildren: async() => (await import('@cheesecake-ui/features/activity/create')).FeaturesActivityCreateModule}
+    path: 'activities', children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        loadChildren: async () => (await import('@cheesecake-ui/features/activity/list')).FeaturesActivityListModule
+      },
+      {
+        path: 'new',
+        loadChildren: async () => (await import('@cheesecake-ui/features/activity/create')).FeaturesActivityCreateModule
+      }
     ]
-  },
-  {
-    path: 'bob', component: DeletemeComponent
   }
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(uiApplicationShellRoutes)],
-  declarations:[DeletemeComponent]
 })
-export class UiApplicationShellModule {}
+export class UiApplicationShellModule {
+}
