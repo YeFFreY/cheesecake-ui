@@ -17,7 +17,7 @@ export class CreateActivityFacadeService {
   private submit$: Observable<boolean> = this.submitSubject.asObservable();
   private errors$ = this.errorsSubject.asObservable();
 
-  public vm$ = combineLatest(this.errors$).pipe(
+  public vm$ = combineLatest([this.errors$]).pipe(
     map(([error]) => ({ error }))
   );
   private formService: CreateActivityFormService;

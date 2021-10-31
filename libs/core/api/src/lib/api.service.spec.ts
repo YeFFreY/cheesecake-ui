@@ -1,38 +1,32 @@
-import { TestBed } from '@angular/core/testing';
-
 import { ApiService } from './api.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
+import { createHttpFactory, HttpMethod, SpectatorHttp } from '@ngneat/spectator/jest';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ApiService', () => {
-  let service: ApiService;
-  let http: HttpTestingController;
+  let spectator: SpectatorHttp<ApiService>;
+  const createService = createHttpFactory({
+    service: ApiService,
+    imports: [RouterTestingModule]
+  })
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
-    });
-    service = TestBed.inject(ApiService);
-    http = TestBed.inject(HttpTestingController);
+    spectator = createService();
   });
 
-  afterEach(() => {
-    http.verify();
-  });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(spectator.service).toBeTruthy();
   });
 
   it('should call HTTP GET', () => {
     const url = 'url';
     const body = { data: { id: 'test' } };
 
-    const serviceSpy = subscribeSpyTo(service.sendQuery(url));
+    const serviceSpy = subscribeSpyTo(spectator.service.sendQuery(url));
 
-    const req = http.expectOne(url);
+    const req = spectator.expectOne(url, HttpMethod.GET);
     req.flush(body);
-    expect(req.request.method).toEqual('GET');
     expect(serviceSpy.getValues()).toEqual([body]);
   });
 
@@ -40,11 +34,10 @@ describe('ApiService', () => {
     const url = 'url';
     const body = { data: { id: 'test' } };
 
-    const serviceSpy = subscribeSpyTo(service.sendCommand<typeof body>(url, { data: 'some payload' }));
+    const serviceSpy = subscribeSpyTo(spectator.service.sendCommand<typeof body>(url, { data: 'some payload' }));
 
-    const req = http.expectOne(url);
+    const req = spectator.expectOne(url, HttpMethod.POST);
     req.flush(body);
-    expect(req.request.method).toEqual('POST');
     expect(serviceSpy.getValues()).toEqual([body]);
   });
 });

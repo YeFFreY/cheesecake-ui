@@ -19,7 +19,7 @@ export function initializeSession(api: ApiService, sessionService: SessionServic
   };
 }
 
-export const sessionInitialize: Provider = {
+export const sessionInitializerProvider: Provider = {
   provide: APP_INITIALIZER,
   useFactory: initializeSession,
   multi: true,

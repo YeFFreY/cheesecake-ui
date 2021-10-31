@@ -25,7 +25,6 @@ describe('HomeComponent', () => {
 
   it('should contains sign in and sign up', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('p')?.textContent).toContain('Sign in')
-    expect(compiled.querySelector('p')?.textContent).toContain('Sign up')
+    expect(compiled.querySelector('a')?.textContent).toContain('Sign in')
   })
 });
