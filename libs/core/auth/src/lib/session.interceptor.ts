@@ -21,8 +21,10 @@ export class SessionInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if(error.status === 401){
-          this.sessionService.signedOut(!['/auth/session', 'auth/login'].includes(request.url))
-          return EMPTY;
+          const requiresRedirect = !['/auth/session', 'auth/login'].includes(request.url)
+          this.sessionService.signedOut(requiresRedirect)
+          // if redirection to login is required, we don't send the error the the original caller
+          return requiresRedirect ? EMPTY : throwError(error);
         }
         return throwError(error)
       })

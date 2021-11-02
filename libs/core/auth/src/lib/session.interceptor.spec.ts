@@ -39,10 +39,10 @@ describe('SessionInterceptor', () => {
     expect(spectator.inject(SessionService).signedOut).toBeCalledWith(true);
   })
 
-  it('shoud sign out but NOT redirect when 401 and special URL : session check or login', () => {
+  it('shoud sign out but NOT redirect when 401 and special URL : session check or login, error should be transmitted to caller', () => {
     const serviceSpy = subscribeSpyTo(spectator.service.intercept(new HttpRequest('POST', '/auth/session', {}),  mockError(401)), { expectErrors: true});
     expect(serviceSpy.getValues()).toEqual([]);
-    expect(serviceSpy.receivedError()).toBeFalsy();
+    expect(serviceSpy.receivedError()).toBeTruthy();
     expect(spectator.inject(SessionService).signedOut).toBeCalledWith(false);
   })
 

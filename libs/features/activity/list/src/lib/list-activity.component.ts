@@ -22,7 +22,7 @@ import { ListActivityFacadeService } from './list-activity-facade.service';
       <div class='content'>
         <div class='activities'>
           <div *ngFor='let activity of vm.activities'>
-            <h2>{{activity.name}}</h2>
+            <a [routerLink]='["details", activity.id]' class='unstyled'><h2>{{activity.name}}</h2></a>
             <p>{{activity.description}}</p>
           </div>
         </div>
