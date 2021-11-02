@@ -21,6 +21,6 @@ describe('ListActivityComponent', () => {
   it('should create', () => {
     expect(spectator.query('h1')).toHaveText('Activities');
     expect(spectator.query('.activities')?.children.length).toEqual(1);
-    expect(spectator.queryAll('.activities > div > h2')).toHaveText(["test"])
+    expect(spectator.queryAll('.activities > div > a > h2')).toHaveText(["test"])
   });
 });

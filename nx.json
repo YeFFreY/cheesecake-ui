@@ -43,6 +43,9 @@
     "features-activity-create": {
       "tags": ["type:feature"]
     },
+    "features-activity-details": {
+      "tags": ["type:feature"]
+    },
     "features-activity-list": {
       "tags": ["type:feature"]
     },

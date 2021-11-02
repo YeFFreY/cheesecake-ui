@@ -14,6 +14,10 @@ export const uiApplicationShellRoutes: Route[] = [
       {
         path: 'new',
         loadChildren: async () => (await import('@cheesecake-ui/features/activity/create')).FeaturesActivityCreateModule
+      },
+      {
+        path: 'details/:id',
+        loadChildren: async () => (await import('@cheesecake-ui/features/activity/details')).FeaturesActivityDetailsModule
       }
     ]
   }

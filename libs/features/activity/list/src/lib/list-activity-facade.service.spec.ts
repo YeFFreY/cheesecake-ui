@@ -21,7 +21,7 @@ describe('ListActivityFacadeService', () => {
     expect(spectator.service).toBeTruthy();
   });
 
-  it('should immediately fetch services', () => {
+  it('should immediately fetch activities', () => {
     const vmSpy = subscribeSpyTo(spectator.service.vm$);
     expect(vmSpy.getValues()).toEqual([{ activities: [{}, {}] }]);
   });
