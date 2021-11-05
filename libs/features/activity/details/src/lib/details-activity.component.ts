@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'cc-details-activity',
   template: `
     <div *ngIf='facade.vm$ | async as vm'>
+      <a routerLink='../edit' class='button'>Edit</a>
       <h2>{{vm.activity?.name}}</h2>
       <p>{{vm.activity?.description}}</p>
     </div>

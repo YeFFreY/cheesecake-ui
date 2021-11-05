@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { ApiService, Resource, ResourceId } from '@cheesecake-ui/core/api';
 import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 export interface ActivityDetails extends Resource {
   name: string;
   description: string;
 }
 
+@UntilDestroy()
 @Injectable()
 export class DetailsActivityFacadeService {
 
@@ -19,12 +21,14 @@ export class DetailsActivityFacadeService {
 
 
   public vm$: Observable<{ activity: ActivityDetails }> = combineLatest([this.activity$]).pipe(
-    map(([activity]) => ({ activity }))
+    map(([activity]) => ({ activity })),
+    untilDestroyed(this)
   );
 
   constructor(private api: ApiService) {
     this.id$.pipe(
-      switchMap((id) => this.fetchActivity(id))
+      switchMap((id) => this.fetchActivity(id)),
+      untilDestroyed(this)
     ).subscribe(result => this.activityStore.next(result.data));
   }
 

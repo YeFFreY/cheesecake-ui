@@ -1,8 +1,8 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CheeseValidators, SimpleFormService } from '@cheesecake-ui/utils/form';
-import { CreateActivityCommand } from './create-activity.domain';
+import { EditActivityCommand } from './edit-activity.domain';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-export class CreateActivityFormService extends SimpleFormService<CreateActivityCommand> {
+export class EditActivityFormService extends SimpleFormService<EditActivityCommand> {
 
   readonly form: FormGroup;
 
@@ -13,5 +13,4 @@ export class CreateActivityFormService extends SimpleFormService<CreateActivityC
       description: ['', [Validators.required, CheeseValidators.notEmpty]]
     })
   }
-
 }

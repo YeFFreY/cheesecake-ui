@@ -16,15 +16,23 @@ export const uiApplicationShellRoutes: Route[] = [
         loadChildren: async () => (await import('@cheesecake-ui/features/activity/create')).FeaturesActivityCreateModule
       },
       {
-        path: 'details/:id',
-        loadChildren: async () => (await import('@cheesecake-ui/features/activity/details')).FeaturesActivityDetailsModule
+        path: ':id',
+        children: [
+          {
+            path: 'details',
+            loadChildren: async () => (await import('@cheesecake-ui/features/activity/details')).FeaturesActivityDetailsModule
+          },
+          {
+            path: 'edit',
+            loadChildren: async () => (await import('@cheesecake-ui/features/activity/edit')).FeaturesActivityEditModule
+          }]
       }
     ]
   }
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(uiApplicationShellRoutes)],
+  imports: [CommonModule, RouterModule.forChild(uiApplicationShellRoutes)]
 })
 export class UiApplicationShellModule {
 }

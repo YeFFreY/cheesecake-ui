@@ -23,6 +23,9 @@
       "@cheesecake-ui/features/activity/details": [
         "libs/features/activity/details/src/index.ts"
       ],
+      "@cheesecake-ui/features/activity/edit": [
+        "libs/features/activity/edit/src/index.ts"
+      ],
       "@cheesecake-ui/features/activity/list": [
         "libs/features/activity/list/src/index.ts"
       ],
