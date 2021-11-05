@@ -25,7 +25,6 @@ export class SessionService {
   public signedOut(redirectToLogin: boolean = false) {
     this.state.next({ authenticated: false });
     if(redirectToLogin) {
-      console.log('Redirecting to login!')
       this.router.navigate(['/login']);
     }
   }

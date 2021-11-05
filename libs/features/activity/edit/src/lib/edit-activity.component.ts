@@ -1,21 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CreateActivityFacadeService } from './create-activity-facade.service';
+import { EditActivityFacadeService } from './edit-activity-facade.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-
-/*
-* https://blog.avada.io/css/magazine-layouts/
-*
-* https://codepen.io/youthpoint/pen/eooVOV
-*
-* */
-@UntilDestroy()
 @Component({
-  selector: 'cc-create-activity',
+  selector: 'cc-edit-activity',
   template: `
     <div class='illustration'
-         style='background-image: url("https://via.placeholder.com/400x600.png/09f/fff?text=un+type+avec+une+ampoule+en+mode+idee")'>
+         style='background-image: url("https://via.placeholder.com/400x600.png/09f/fff?text=un+type+qui+corrige+une+erreur+sur+un+document")'>
     </div>
     <div *ngIf='(this.facade.vm$ | async) as vm' class='form'>
       <form [formGroup]='facade.form' id='createActivityForm' (ngSubmit)='facade.submit()' errorTailor>
@@ -76,14 +67,21 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
         grid-template-columns : 1fr 2fr;
       }
     }
-
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [CreateActivityFacadeService]
+  providers: [EditActivityFacadeService]
 })
-export class CreateActivityComponent {
+export class EditActivityComponent {
 
-  constructor(public readonly facade: CreateActivityFacadeService, private router: Router, private route: ActivatedRoute) {
-    this.facade.submitted$.pipe(untilDestroyed(this)).subscribe(id => router.navigate(['..', id, 'details'], { relativeTo: route }));
+  constructor(public readonly facade: EditActivityFacadeService, private readonly route: ActivatedRoute, private router: Router) {
+    const activityId = this.route.snapshot.paramMap.get('id');
+    if (activityId) {
+      this.facade.updateActivityId(activityId);
+    }
+
+    this.facade.submitted$.subscribe(() => {
+      this.router.navigate(['..', 'details'],{relativeTo: route});
+    })
   }
+
 }

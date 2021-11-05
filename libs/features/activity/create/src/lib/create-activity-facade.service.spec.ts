@@ -1,30 +1,30 @@
 import { CreateActivityFacadeService } from './create-activity-facade.service';
-import { createServiceFactory, mockProvider, SpectatorService } from '@ngneat/spectator/jest';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator/jest';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '@cheesecake-ui/core/api';
-import { Router } from '@angular/router';
 import { CreateActivityCommand } from './create-activity.domain';
 import { of } from 'rxjs';
+import { subscribeSpyTo } from '@hirez_io/observer-spy';
 
 describe('CreateActivityFacadeService', () => {
   let spectator: SpectatorService<CreateActivityFacadeService>;
   const createService = createServiceFactory({
     service: CreateActivityFacadeService,
     imports: [ReactiveFormsModule],
-    mocks: [ApiService],
-    providers: [
-      mockProvider(Router)
-    ]
+    mocks: [ApiService]
   });
 
   beforeEach(() => spectator = createService());
 
-  it('should navigate to app when activity created successfully', () => {
+  it('should inform component when activity created successfully', () => {
+    const submittedSpy = subscribeSpyTo(spectator.service.submitted$);
+
     spectator.inject(ApiService).sendCommand.andReturn(of({}));
-
     spectator.service.form.patchValue({ name: 'test', description: 'test' } as CreateActivityCommand);
-    spectator.service.submit();
+    expect(submittedSpy.getValues()).toEqual([]);
 
-    expect(spectator.inject(Router).navigate).toHaveBeenCalledWith(['/app']);
+    spectator.service.submit();
+    expect(submittedSpy.getValues()).toEqual([undefined]);
+
   });
 });

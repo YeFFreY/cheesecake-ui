@@ -20,6 +20,5 @@ describe('CreateActivityComponent', () => {
     expect(spectator.query('#name')).toHaveValue('');
     expect(spectator.query('#description')).toHaveValue('');
     expect(spectator.query('button[type="submit"]')).toExist();
-
   });
 });

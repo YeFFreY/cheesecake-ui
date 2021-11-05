@@ -7,7 +7,7 @@ describe('DetailsActivityComponent', () => {
   let spectator: Spectator<DetailsActivityComponent>;
   const createComponent = createRoutingFactory({
     component: DetailsActivityComponent,
-    params: { i: '1'},
+    params: { id: '1'},
     componentProviders: [
       mockProvider(DetailsActivityFacadeService, {
         vm$: of({ activity: { name: "test name", description: "test description"} })

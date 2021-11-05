@@ -221,6 +221,31 @@
         }
       }
     },
+    "features-activity-edit": {
+      "projectType": "library",
+      "root": "libs/features/activity/edit",
+      "sourceRoot": "libs/features/activity/edit/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/activity/edit"],
+          "options": {
+            "jestConfig": "libs/features/activity/edit/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/activity/edit/src/**/*.ts",
+              "libs/features/activity/edit/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "features-activity-list": {
       "projectType": "library",
       "root": "libs/features/activity/list",
