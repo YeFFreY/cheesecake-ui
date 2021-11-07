@@ -58,6 +58,9 @@
     "features-home": {
       "tags": ["type:feature"]
     },
+    "shared-components-drawer": {
+      "tags": ["type:ui"]
+    },
     "test-mock": {
       "tags": ["type:test"]
     },
