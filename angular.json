@@ -332,6 +332,32 @@
       },
       "tags": ["type:feature"]
     },
+    "features-skill-create": {
+      "projectType": "library",
+      "root": "libs/features/skill/create",
+      "sourceRoot": "libs/features/skill/create/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/skill/create"],
+          "options": {
+            "jestConfig": "libs/features/skill/create/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/skill/create/src/**/*.ts",
+              "libs/features/skill/create/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
     "shared-components-drawer": {
       "projectType": "library",
       "root": "libs/shared/components/drawer",
