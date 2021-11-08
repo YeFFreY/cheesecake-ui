@@ -92,7 +92,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "cheesecake-web-e2e": {
       "root": "apps/cheesecake-web-e2e",
@@ -119,7 +120,9 @@
             "lintFilePatterns": ["apps/cheesecake-web-e2e/**/*.{js,ts}"]
           }
         }
-      }
+      },
+      "tags": [],
+      "implicitDependencies": ["cheesecake-web"]
     },
     "core-api": {
       "projectType": "library",
@@ -144,7 +147,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": ["type:core"]
     },
     "core-auth": {
       "projectType": "library",
@@ -169,7 +173,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": ["type:core"]
     },
     "features-activity-create": {
       "projectType": "library",
@@ -194,7 +199,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": ["type:feature"]
     },
     "features-activity-details": {
       "projectType": "library",
@@ -219,7 +225,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": ["type:feature"]
     },
     "features-activity-edit": {
       "projectType": "library",
@@ -244,7 +251,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": ["type:feature"]
     },
     "features-activity-list": {
       "projectType": "library",
@@ -269,7 +277,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": ["type:feature"]
     },
     "features-auth-login": {
       "projectType": "library",
@@ -294,7 +303,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": ["type:feature"]
     },
     "features-home": {
       "projectType": "library",
@@ -319,7 +329,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": ["type:feature"]
     },
     "shared-components-drawer": {
       "projectType": "library",
@@ -344,7 +355,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": ["type:ui"]
     },
     "test-mock": {
       "root": "libs/test/mock",
@@ -366,7 +378,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["type:test"]
     },
     "ui-application-shell": {
       "projectType": "library",
@@ -391,7 +404,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": ["type:ui"]
     },
     "ui-shell": {
       "projectType": "library",
@@ -416,7 +430,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": ["type:ui"]
     },
     "utils-form": {
       "projectType": "library",
@@ -441,39 +456,8 @@
             ]
           }
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular",
-    "packageManager": "npm"
-  },
-  "schematics": {
-    "@nrwl/angular": {
-      "application": {
-        "linter": "eslint"
       },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/angular:application": {
-      "style": "css",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "style": "css",
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "css"
+      "tags": ["type:util"]
     }
-  },
-  "defaultProject": "cheesecake-web"
+  }
 }

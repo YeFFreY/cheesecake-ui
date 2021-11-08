@@ -26,52 +26,36 @@
       }
     ]
   },
-  "projects": {
-    "cheesecake-web": {
-      "tags": []
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "packageManager": "npm"
+  },
+  "defaultProject": "cheesecake-web",
+  "generators": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
     },
-    "cheesecake-web-e2e": {
-      "tags": [],
-      "implicitDependencies": ["cheesecake-web"]
+    "@nrwl/angular:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
     },
-    "core-api": {
-      "tags": ["type:core"]
+    "@nrwl/angular:library": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
     },
-    "core-auth": {
-      "tags": ["type:core"]
-    },
-    "features-activity-create": {
-      "tags": ["type:feature"]
-    },
-    "features-activity-details": {
-      "tags": ["type:feature"]
-    },
-    "features-activity-edit": {
-      "tags": ["type:feature"]
-    },
-    "features-activity-list": {
-      "tags": ["type:feature"]
-    },
-    "features-auth-login": {
-      "tags": ["type:feature"]
-    },
-    "features-home": {
-      "tags": ["type:feature"]
-    },
-    "shared-components-drawer": {
-      "tags": ["type:ui"]
-    },
-    "test-mock": {
-      "tags": ["type:test"]
-    },
-    "ui-application-shell": {
-      "tags": ["type:ui"]
-    },
-    "ui-shell": {
-      "tags": ["type:ui"]
-    },
-    "utils-form": {
-      "tags": ["type:util"]
+    "@nrwl/angular:component": {
+      "style": "css"
     }
   }
 }
