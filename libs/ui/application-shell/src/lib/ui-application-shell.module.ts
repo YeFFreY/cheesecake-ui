@@ -28,6 +28,14 @@ export const uiApplicationShellRoutes: Route[] = [
           }]
       }
     ]
+  },
+  {
+    path: 'skills', children: [
+      {
+        path: 'new',
+        loadChildren: async () => (await import('@cheesecake-ui/features/skill/create')).FeaturesSkillCreateModule
+      },
+    ]
   }
 ];
 
