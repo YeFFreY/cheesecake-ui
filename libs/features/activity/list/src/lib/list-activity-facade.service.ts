@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { ApiService, Resource } from '@cheesecake-ui/core/api';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 export interface Activity extends Resource {
   name: string;
   description: string;
 }
 
-
+@UntilDestroy()
 @Injectable()
 export class ListActivityFacadeService {
 
@@ -24,7 +25,8 @@ export class ListActivityFacadeService {
 
   constructor(private api: ApiService) {
     this.criteria$.pipe(
-      switchMap(() => this.fetchActivities())
+      switchMap(() => this.fetchActivities()),
+      untilDestroyed(this)
     ).subscribe(result => this.activitiesStore.next(result.data));
   }
 

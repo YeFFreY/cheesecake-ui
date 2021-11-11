@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DetailsActivityFacadeService } from './details-activity-facade.service';
 import { ActivatedRoute } from '@angular/router';
+import { ResourceId } from '@cheesecake-ui/core/api';
 
 @Component({
   selector: 'cc-details-activity',
@@ -16,9 +17,7 @@ import { ActivatedRoute } from '@angular/router';
         <div ><h3>Add skill</h3></div>
       </ng-template>
       <ng-template ccDrawerBody>
-        <div>
-          <p>You can create a new one or add an existing !</p>
-        </div>
+        <cc-create-activity-skill *ngIf='activityId' [activityId]='activityId' (skillSelected)='open = false'></cc-create-activity-skill>
       </ng-template>
     </cc-drawer>
   `,
@@ -28,11 +27,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailsActivityComponent {
   public open = false;
+  public activityId?: ResourceId;
 
   constructor(public readonly facade: DetailsActivityFacadeService, private readonly route: ActivatedRoute) {
     const activityId = this.route.snapshot.paramMap.get('id');
     if (activityId) {
-      this.facade.updateActivityId(activityId);
+      this.activityId = activityId;
+      this.facade.updateActivityId(this.activityId);
     }
   }
 

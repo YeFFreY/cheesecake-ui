@@ -280,6 +280,32 @@
       },
       "tags": ["type:feature"]
     },
+    "features-activity-skill-create": {
+      "projectType": "library",
+      "root": "libs/features/activity-skill/create",
+      "sourceRoot": "libs/features/activity-skill/create/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/activity-skill/create"],
+          "options": {
+            "jestConfig": "libs/features/activity-skill/create/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/activity-skill/create/src/**/*.ts",
+              "libs/features/activity-skill/create/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
     "features-auth-login": {
       "projectType": "library",
       "root": "libs/features/auth/login",
