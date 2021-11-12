@@ -306,6 +306,32 @@
       },
       "tags": ["type:feature"]
     },
+    "features-activity-skill-delete": {
+      "projectType": "library",
+      "root": "libs/features/activity-skill/delete",
+      "sourceRoot": "libs/features/activity-skill/delete/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/activity-skill/delete"],
+          "options": {
+            "jestConfig": "libs/features/activity-skill/delete/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/activity-skill/delete/src/**/*.ts",
+              "libs/features/activity-skill/delete/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
     "features-activity-skill-list": {
       "projectType": "library",
       "root": "libs/features/activity-skill/list",

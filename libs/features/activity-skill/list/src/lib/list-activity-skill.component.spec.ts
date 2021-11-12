@@ -2,11 +2,14 @@ import { ListActivitySkillComponent } from './list-activity-skill.component';
 import { createRoutingFactory, mockProvider, Spectator } from '@ngneat/spectator/jest';
 import { of } from 'rxjs';
 import { ActivitySkill, ListActivitySkillFacadeService } from './list-activity-skill-facade.service';
+import { MockComponent } from 'ng-mocks';
+import { DeleteActivitySkillComponent } from '@cheesecake-ui/features/activity-skill/delete';
 
 describe('ListActivitySkillComponent', () => {
   let spectator: Spectator<ListActivitySkillComponent>;
   const createComponent = createRoutingFactory({
     component: ListActivitySkillComponent,
+    declarations: [MockComponent(DeleteActivitySkillComponent)],
     params: { id: '1' },
     componentProviders: [
       mockProvider(ListActivitySkillFacadeService, {
@@ -21,7 +24,7 @@ describe('ListActivitySkillComponent', () => {
   });
 
   beforeEach(async () => {
-    spectator = createComponent()
+    spectator = createComponent();
   });
 
   it('should create', () => {

@@ -14,8 +14,8 @@ export class ListActivitySkillFacadeService {
   private skillsStore = new Subject<ActivitySkill[]>();
   private criteriaStore = new Subject<ResourceId>();
 
-  private skills$ = this.skillsStore.pipe(distinctUntilChanged());
-  private criteria$ = this.criteriaStore.pipe(distinctUntilChanged());
+  private skills$ = this.skillsStore.asObservable().pipe(distinctUntilChanged());
+  private criteria$ = this.criteriaStore.asObservable();
 
   public vm$ : Observable<{skills: ActivitySkill[]}> = combineLatest([this.skills$]).pipe(
     map(([skills]) => ({ skills }))
