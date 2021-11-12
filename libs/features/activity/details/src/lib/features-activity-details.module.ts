@@ -2,22 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Route, RouterModule } from '@angular/router';
 import { DetailsActivityComponent } from './details-activity.component';
-import { SharedComponentsDrawerModule } from '@cheesecake-ui/shared/components/drawer';
-import { FeaturesActivitySkillCreateModule } from '@cheesecake-ui/features/activity-skill/create';
 import { FeaturesActivitySkillListModule } from '@cheesecake-ui/features/activity-skill/list';
 
-export const featuresActivityDetailsRoutes: Route[] = [{ path: '', component: DetailsActivityComponent}];
+export const featuresActivityDetailsRoutes: Route[] = [{ path: '', component: DetailsActivityComponent }];
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(featuresActivityDetailsRoutes),
-    FeaturesActivitySkillCreateModule,
-    FeaturesActivitySkillListModule,
-    SharedComponentsDrawerModule
+    FeaturesActivitySkillListModule
   ],
   declarations: [
     DetailsActivityComponent
-  ],
+  ]
 })
-export class FeaturesActivityDetailsModule {}
+export class FeaturesActivityDetailsModule {
+}
