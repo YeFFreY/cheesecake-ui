@@ -4,11 +4,13 @@ import { of } from 'rxjs';
 import { ActivitySkill, ListActivitySkillFacadeService } from './list-activity-skill-facade.service';
 import { MockComponent } from 'ng-mocks';
 import { DeleteActivitySkillComponent } from '@cheesecake-ui/features/activity-skill/delete';
+import { SharedComponentsDrawerModule } from '@cheesecake-ui/shared/components/drawer';
 
 describe('ListActivitySkillComponent', () => {
   let spectator: Spectator<ListActivitySkillComponent>;
   const createComponent = createRoutingFactory({
     component: ListActivitySkillComponent,
+    imports: [SharedComponentsDrawerModule],
     declarations: [MockComponent(DeleteActivitySkillComponent)],
     params: { id: '1' },
     componentProviders: [
@@ -31,7 +33,9 @@ describe('ListActivitySkillComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  it('should display activity skills list', () => {
+  it('should display activity skills list and add skill button', () => {
     expect(spectator.queryAll('.skill-item')).toHaveLength(2);
+    expect(spectator.queryAll('cc-delete-activity-skill')).toHaveLength(2);
+    expect(spectator.query('#btn-add-skill')).toHaveText('add skill')
   });
 });
