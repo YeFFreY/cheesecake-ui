@@ -3,12 +3,15 @@ import { createRoutingFactory, mockProvider, Spectator } from '@ngneat/spectator
 import { of } from 'rxjs';
 import { DetailsActivityFacadeService } from './details-activity-facade.service';
 import { SharedComponentsDrawerModule } from '@cheesecake-ui/shared/components/drawer';
+import { MockComponent } from 'ng-mocks';
+import { ListActivitySkillComponent } from '@cheesecake-ui/features/activity-skill/list';
 
 describe('DetailsActivityComponent', () => {
   let spectator: Spectator<DetailsActivityComponent>;
   const createComponent = createRoutingFactory({
     component: DetailsActivityComponent,
     imports: [SharedComponentsDrawerModule],
+    declarations: [MockComponent(ListActivitySkillComponent)],
     params: { id: '1' },
     componentProviders: [
       mockProvider(DetailsActivityFacadeService, {

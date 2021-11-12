@@ -11,6 +11,7 @@ import { ResourceId } from '@cheesecake-ui/core/api';
       <h2>{{vm.activity?.name}}</h2>
       <p>{{vm.activity?.description}}</p>
       <button (click)='open = true'>add skill</button>
+      <cc-list-activity-skill *ngIf='activityId' [activityId]='activityId'></cc-list-activity-skill>
     </div>
     <cc-drawer [isOpen]='open' (drawerClosed)='open = false'>
       <ng-template ccDrawerHeader>

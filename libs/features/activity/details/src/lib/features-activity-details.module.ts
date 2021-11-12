@@ -4,6 +4,7 @@ import { Route, RouterModule } from '@angular/router';
 import { DetailsActivityComponent } from './details-activity.component';
 import { SharedComponentsDrawerModule } from '@cheesecake-ui/shared/components/drawer';
 import { FeaturesActivitySkillCreateModule } from '@cheesecake-ui/features/activity-skill/create';
+import { FeaturesActivitySkillListModule } from '@cheesecake-ui/features/activity-skill/list';
 
 export const featuresActivityDetailsRoutes: Route[] = [{ path: '', component: DetailsActivityComponent}];
 
@@ -12,6 +13,7 @@ export const featuresActivityDetailsRoutes: Route[] = [{ path: '', component: De
     CommonModule,
     RouterModule.forChild(featuresActivityDetailsRoutes),
     FeaturesActivitySkillCreateModule,
+    FeaturesActivitySkillListModule,
     SharedComponentsDrawerModule
   ],
   declarations: [
