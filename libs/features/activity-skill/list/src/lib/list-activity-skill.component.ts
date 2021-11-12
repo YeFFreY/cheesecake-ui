@@ -9,6 +9,9 @@ import { ResourceId } from '@cheesecake-ui/core/api';
       <h3>Skills improved by this activity</h3>
       <div *ngFor='let skill of vm.skills; trackBy: trackBySkillId' class='skill-item'>
         <h4>{{skill.name}}</h4>
+        <cc-delete-activity-skill [activityId]='activityId'
+                                  [skillId]='skill.id'
+                                  (skillDeleted)='onSkillDeleted()'></cc-delete-activity-skill>
       </div>
       <div *ngIf='vm.skills.length === 0'>No Skills currently associated with the activity</div>
     </ng-container>
@@ -34,7 +37,10 @@ export class ListActivitySkillComponent implements OnChanges {
   }
 
   trackBySkillId(index: number, skill: ActivitySkill) {
-    return skill.id
+    return skill.id;
   }
 
+  onSkillDeleted() {
+    this.facade.updateCriteria(this.activityId);
+  }
 }
