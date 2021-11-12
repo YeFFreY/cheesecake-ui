@@ -53,7 +53,7 @@ export class CreateActivitySkillFacadeService {
     return this.api.sendCommand<ResourceId>('api/activity-skills', { activityId, skillId });
   }
 
-  updateCriteria(activityId: ResourceId) {
+  public updateCriteria(activityId: ResourceId) {
     this.criteriaStore.next(activityId);
   }
 }
