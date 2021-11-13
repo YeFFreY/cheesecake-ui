@@ -7,6 +7,7 @@ import { ListActivityFacadeService } from './list-activity-facade.service';
     <h1>Activities</h1>
     <a [routerLink]='["new"]' class='button'>New Activity</a>
     <a routerLink='../skills/new' class='button'>New Skill</a>
+    <a routerLink='../equipments/new' class='button'>New Equipment</a>
     <div *ngIf='facade.vm$ | async as vm' class='container'>
       <div class='filter'>
         <h3>Categories</h3>

@@ -36,6 +36,14 @@ export const uiApplicationShellRoutes: Route[] = [
         loadChildren: async () => (await import('@cheesecake-ui/features/skill/create')).FeaturesSkillCreateModule
       },
     ]
+  },
+  {
+    path: 'equipments', children: [
+      {
+        path: 'new',
+        loadChildren: async () => (await import('@cheesecake-ui/features/equipment/create')).FeaturesEquipmentCreateModule
+      },
+    ]
   }
 ];
 

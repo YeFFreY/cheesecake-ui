@@ -41,6 +41,9 @@
       "@cheesecake-ui/features/auth/login": [
         "libs/features/auth/login/src/index.ts"
       ],
+      "@cheesecake-ui/features/equipment/create": [
+        "libs/features/equipment/create/src/index.ts"
+      ],
       "@cheesecake-ui/features/home": ["libs/features/home/src/index.ts"],
       "@cheesecake-ui/features/skill/create": [
         "libs/features/skill/create/src/index.ts"
