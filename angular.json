@@ -384,6 +384,32 @@
       },
       "tags": ["type:feature"]
     },
+    "features-equipment-create": {
+      "projectType": "library",
+      "root": "libs/features/equipment/create",
+      "sourceRoot": "libs/features/equipment/create/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/equipment/create"],
+          "options": {
+            "jestConfig": "libs/features/equipment/create/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/equipment/create/src/**/*.ts",
+              "libs/features/equipment/create/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
     "features-home": {
       "projectType": "library",
       "root": "libs/features/home",
