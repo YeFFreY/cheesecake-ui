@@ -1,6 +1,5 @@
 import { CreateActivitySkillComponent } from './create-activity-skill.component';
 import { createRoutingFactory, mockProvider, Spectator } from '@ngneat/spectator/jest';
-import { SharedComponentsDrawerModule } from '@cheesecake-ui/shared/components/drawer';
 import { of } from 'rxjs';
 import { CreateActivitySkillFacadeService, Skill } from './create-activity-skill-facade.service';
 
@@ -8,7 +7,6 @@ describe('CreateActivitySkillComponent', () => {
   let spectator: Spectator<CreateActivitySkillComponent>;
   const createComponent = createRoutingFactory({
     component: CreateActivitySkillComponent,
-    imports: [SharedComponentsDrawerModule],
     params: { id: '1' },
     componentProviders: [
       mockProvider(CreateActivitySkillFacadeService, {

@@ -280,6 +280,32 @@
       },
       "tags": ["type:feature"]
     },
+    "features-activity-materials-create": {
+      "projectType": "library",
+      "root": "libs/features/activity-materials/create",
+      "sourceRoot": "libs/features/activity-materials/create/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/activity-materials/create"],
+          "options": {
+            "jestConfig": "libs/features/activity-materials/create/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/activity-materials/create/src/**/*.ts",
+              "libs/features/activity-materials/create/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
     "features-activity-skill-create": {
       "projectType": "library",
       "root": "libs/features/activity-skill/create",
