@@ -3,12 +3,15 @@ import { createRoutingFactory, mockProvider, Spectator } from '@ngneat/spectator
 import { SharedComponentsDrawerModule } from '@cheesecake-ui/shared/components/drawer';
 import { of } from 'rxjs';
 import { ActivityMaterials, ListActivityMaterialsFacadeService } from './list-activity-materials-facade.service';
+import { MockComponent } from 'ng-mocks';
+import { DeleteActivityMaterialsComponent } from '@cheesecake-ui/features/activity-materials/delete';
 
 describe('ListActivityMaterialsComponent', () => {
   let spectator: Spectator<ListActivityMaterialsComponent>;
   const createComponent = createRoutingFactory({
     component: ListActivityMaterialsComponent,
     imports: [SharedComponentsDrawerModule],
+    declarations: [MockComponent(DeleteActivityMaterialsComponent)],
     params: { id: '1' },
     componentProviders: [
       mockProvider(ListActivityMaterialsFacadeService, {
@@ -32,6 +35,7 @@ describe('ListActivityMaterialsComponent', () => {
 
   it('should display activity materials list and add material button', () => {
     expect(spectator.queryAll('.materials-item')).toHaveLength(2);
+    expect(spectator.queryAll('cc-delete-activity-materials')).toHaveLength(2);
     expect(spectator.query('#btn-add-materials')).toHaveText('add materials');
   });
 });

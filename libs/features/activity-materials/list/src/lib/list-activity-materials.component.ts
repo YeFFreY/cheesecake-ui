@@ -10,6 +10,7 @@ import { ResourceId } from '@cheesecake-ui/core/api';
       <button (click)='openMaterialsDrawer()' id='btn-add-materials'>add materials</button>
       <div *ngFor='let equipment of vm.materials; trackBy: trackByEquipmentId' class='materials-item'>
         <h4>{{equipment.name}}</h4>
+        <cc-delete-activity-materials [activityId]='activityId' [equipmentId]='equipment.id' (equipmentDeleted)='onMaterialsDeleted()'></cc-delete-activity-materials>
       </div>
       <div *ngIf='vm.materials.length === 0'>No Materials required for the activity</div>
     </ng-container>
@@ -45,6 +46,10 @@ export class ListActivityMaterialsComponent implements OnChanges {
 
   trackByEquipmentId(index: number, materials: ActivityMaterials) {
     return materials.id;
+  }
+
+  onMaterialsDeleted() {
+    this.refreshMaterials()
   }
 
   onMaterialsSelected() {
