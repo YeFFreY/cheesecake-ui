@@ -20,6 +20,9 @@
       "@cheesecake-ui/features/activity-materials/create": [
         "libs/features/activity-materials/create/src/index.ts"
       ],
+      "@cheesecake-ui/features/activity-materials/delete": [
+        "libs/features/activity-materials/delete/src/index.ts"
+      ],
       "@cheesecake-ui/features/activity-materials/list": [
         "libs/features/activity-materials/list/src/index.ts"
       ],
