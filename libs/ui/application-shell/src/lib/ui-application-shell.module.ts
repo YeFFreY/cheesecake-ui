@@ -25,7 +25,17 @@ export const uiApplicationShellRoutes: Route[] = [
           {
             path: 'edit',
             loadChildren: async () => (await import('@cheesecake-ui/features/activity/edit')).FeaturesActivityEditModule
-          }]
+          },
+          {
+            path: 'operations',
+            children: [
+              {
+                path: 'new',
+                loadChildren: async () => (await import('@cheesecake-ui/features/activity-operation/create')).FeaturesActivityOperationCreateModule
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -34,7 +44,7 @@ export const uiApplicationShellRoutes: Route[] = [
       {
         path: 'new',
         loadChildren: async () => (await import('@cheesecake-ui/features/skill/create')).FeaturesSkillCreateModule
-      },
+      }
     ]
   },
   {
@@ -42,7 +52,7 @@ export const uiApplicationShellRoutes: Route[] = [
       {
         path: 'new',
         loadChildren: async () => (await import('@cheesecake-ui/features/equipment/create')).FeaturesEquipmentCreateModule
-      },
+      }
     ]
   }
 ];

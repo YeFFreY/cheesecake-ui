@@ -26,6 +26,9 @@
       "@cheesecake-ui/features/activity-materials/list": [
         "libs/features/activity-materials/list/src/index.ts"
       ],
+      "@cheesecake-ui/features/activity-operation/create": [
+        "libs/features/activity-operation/create/src/index.ts"
+      ],
       "@cheesecake-ui/features/activity-skill/create": [
         "libs/features/activity-skill/create/src/index.ts"
       ],
