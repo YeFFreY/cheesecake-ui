@@ -17,7 +17,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
           <div class='form-grid'>
             <div class='form-element'>
               <label for='name'>Operation Type</label>
-              <input type='text' id='type' formControlName='type' class='input'>
+              <cc-selector id='type' formControlName='type' [options]='vm.operationTypes'></cc-selector>
             </div>
             <div class='form-element'>
               <label for='description'>Description</label>
