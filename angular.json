@@ -592,6 +592,32 @@
       },
       "tags": ["type:ui"]
     },
+    "shared-components-selector": {
+      "projectType": "library",
+      "root": "libs/shared/components/selector",
+      "sourceRoot": "libs/shared/components/selector/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/components/selector"],
+          "options": {
+            "jestConfig": "libs/shared/components/selector/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/components/selector/src/**/*.ts",
+              "libs/shared/components/selector/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:ui"]
+    },
     "test-mock": {
       "root": "libs/test/mock",
       "sourceRoot": "libs/test/mock/src",
