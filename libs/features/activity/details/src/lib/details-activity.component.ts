@@ -15,6 +15,7 @@ import { ResourceId } from '@cheesecake-ui/core/api';
       <cc-list-activity-skill *ngIf='activityId' [activityId]='activityId'></cc-list-activity-skill>
       <cc-list-activity-materials *ngIf='activityId' [activityId]='activityId'></cc-list-activity-materials>
       <cc-list-activity-operation *ngIf='activityId' [activityId]='activityId'></cc-list-activity-operation>
+      <cc-list-activity-variant *ngIf='activityId' [activityId]='activityId'></cc-list-activity-variant>
     </div>
 
   `,

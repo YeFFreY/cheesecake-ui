@@ -44,6 +44,9 @@
       "@cheesecake-ui/features/activity-variant/create": [
         "libs/features/activity-variant/create/src/index.ts"
       ],
+      "@cheesecake-ui/features/activity-variant/list": [
+        "libs/features/activity-variant/list/src/index.ts"
+      ],
       "@cheesecake-ui/features/activity/create": [
         "libs/features/activity/create/src/index.ts"
       ],

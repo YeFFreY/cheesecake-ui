@@ -6,12 +6,13 @@ import { MockComponent } from 'ng-mocks';
 import { ListActivitySkillComponent } from '@cheesecake-ui/features/activity-skill/list';
 import { ListActivityMaterialsComponent } from '@cheesecake-ui/features/activity-materials/list';
 import { ListActivityOperationComponent } from '@cheesecake-ui/features/activity-operation/list';
+import { ListActivityVariantComponent } from '@cheesecake-ui/features/activity-variant/list';
 
 describe('DetailsActivityComponent', () => {
   let spectator: Spectator<DetailsActivityComponent>;
   const createComponent = createRoutingFactory({
     component: DetailsActivityComponent,
-    declarations: [MockComponent(ListActivitySkillComponent), MockComponent(ListActivityMaterialsComponent), MockComponent(ListActivityOperationComponent)],
+    declarations: [MockComponent(ListActivitySkillComponent), MockComponent(ListActivityMaterialsComponent), MockComponent(ListActivityOperationComponent), MockComponent(ListActivityVariantComponent)],
     params: { id: '1' },
     componentProviders: [
       mockProvider(DetailsActivityFacadeService, {
