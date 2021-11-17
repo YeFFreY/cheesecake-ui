@@ -34,6 +34,15 @@ export const uiApplicationShellRoutes: Route[] = [
                 loadChildren: async () => (await import('@cheesecake-ui/features/activity-operation/create')).FeaturesActivityOperationCreateModule
               }
             ]
+          },
+          {
+            path: 'variants',
+            children: [
+              {
+                path: 'new',
+                loadChildren: async () => (await import('@cheesecake-ui/features/activity-variant/create')).FeaturesActivityVariantCreateModule
+              }
+            ]
           }
         ]
       }

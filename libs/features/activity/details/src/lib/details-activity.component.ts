@@ -11,6 +11,7 @@ import { ResourceId } from '@cheesecake-ui/core/api';
       <h2>{{vm.activity?.name}}</h2>
       <p>{{vm.activity?.description}}</p>
       <a routerLink='../operations/new' class='button'>Add operation</a>
+      <a routerLink='../variants/new' class='button'>Add variant</a>
       <cc-list-activity-skill *ngIf='activityId' [activityId]='activityId'></cc-list-activity-skill>
       <cc-list-activity-materials *ngIf='activityId' [activityId]='activityId'></cc-list-activity-materials>
       <cc-list-activity-operation *ngIf='activityId' [activityId]='activityId'></cc-list-activity-operation>
