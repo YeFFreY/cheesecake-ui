@@ -384,6 +384,32 @@
       },
       "tags": ["type:feature"]
     },
+    "features-activity-operation-list": {
+      "projectType": "library",
+      "root": "libs/features/activity-operation/list",
+      "sourceRoot": "libs/features/activity-operation/list/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/activity-operation/list"],
+          "options": {
+            "jestConfig": "libs/features/activity-operation/list/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/activity-operation/list/src/**/*.ts",
+              "libs/features/activity-operation/list/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
     "features-activity-skill-create": {
       "projectType": "library",
       "root": "libs/features/activity-skill/create",
