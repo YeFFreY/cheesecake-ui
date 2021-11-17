@@ -514,6 +514,32 @@
       },
       "tags": ["type:feature"]
     },
+    "features-activity-variant-list": {
+      "projectType": "library",
+      "root": "libs/features/activity-variant/list",
+      "sourceRoot": "libs/features/activity-variant/list/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/activity-variant/list"],
+          "options": {
+            "jestConfig": "libs/features/activity-variant/list/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/activity-variant/list/src/**/*.ts",
+              "libs/features/activity-variant/list/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
     "features-auth-login": {
       "projectType": "library",
       "root": "libs/features/auth/login",
