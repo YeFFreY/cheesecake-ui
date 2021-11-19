@@ -566,6 +566,32 @@
       },
       "tags": ["type:feature"]
     },
+    "features-calendar-create": {
+      "projectType": "library",
+      "root": "libs/features/calendar/create",
+      "sourceRoot": "libs/features/calendar/create/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/calendar/create"],
+          "options": {
+            "jestConfig": "libs/features/calendar/create/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/calendar/create/src/**/*.ts",
+              "libs/features/calendar/create/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
     "features-equipment-create": {
       "projectType": "library",
       "root": "libs/features/equipment/create",

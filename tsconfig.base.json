@@ -62,6 +62,9 @@
       "@cheesecake-ui/features/auth/login": [
         "libs/features/auth/login/src/index.ts"
       ],
+      "@cheesecake-ui/features/calendar/create": [
+        "libs/features/calendar/create/src/index.ts"
+      ],
       "@cheesecake-ui/features/equipment/create": [
         "libs/features/equipment/create/src/index.ts"
       ],
