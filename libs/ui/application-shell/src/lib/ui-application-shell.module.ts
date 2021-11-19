@@ -63,7 +63,15 @@ export const uiApplicationShellRoutes: Route[] = [
         loadChildren: async () => (await import('@cheesecake-ui/features/equipment/create')).FeaturesEquipmentCreateModule
       }
     ]
-  }
+  },
+  {
+    path: 'calendars', children: [
+      {
+        path: 'new',
+        loadChildren: async () => (await import('@cheesecake-ui/features/calendar/create')).FeaturesCalendarCreateModule
+      }
+    ]
+  },
 ];
 
 @NgModule({
