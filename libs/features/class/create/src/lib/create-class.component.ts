@@ -1,22 +1,22 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CreateCalendarFacadeService } from './create-calendar-facade.service';
+import { CreateClassFacadeService } from './create-class-facade.service';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
-  selector: 'cc-create-calendar',
+  selector: 'cc-create-class',
   template: `
     <div class='illustration'
-         style='background-image: url("https://via.placeholder.com/400x600.png/09f/fff?text=un+calendrier")'>
+         style='background-image: url("https://via.placeholder.com/400x600.png/09f/fff?text=une+classe+plein+d+eleves")'>
     </div>
     <div *ngIf='(this.facade.vm$ | async) as vm' class='form'>
-      <form [formGroup]='facade.form' id='createCalendarForm' (ngSubmit)='facade.submit()' errorTailor>
+      <form [formGroup]='facade.form' id='createClassForm' (ngSubmit)='facade.submit()' errorTailor>
         <section>{{vm.error?.summary}}</section>
         <section>
           <div class='form-grid'>
             <div class='form-element'>
-              <label for='name'>Calendar Name</label>
+              <label for='name'>Class Name</label>
               <input type='text' id='name' formControlName='name' class='input'>
             </div>
             <div class='form-element'>
@@ -72,11 +72,11 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [CreateCalendarFacadeService]
+  providers: [CreateClassFacadeService]
 })
-export class CreateCalendarComponent {
+export class CreateClassComponent {
 
-  constructor(public readonly facade: CreateCalendarFacadeService, private router: Router) {
+  constructor(public readonly facade: CreateClassFacadeService, private router: Router) {
     this.facade.submitted$.pipe(untilDestroyed(this)).subscribe(() => router.navigateByUrl('app/activities'));
   }
 

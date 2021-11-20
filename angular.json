@@ -592,6 +592,32 @@
       },
       "tags": ["type:feature"]
     },
+    "features-class-create": {
+      "projectType": "library",
+      "root": "libs/features/class/create",
+      "sourceRoot": "libs/features/class/create/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/class/create"],
+          "options": {
+            "jestConfig": "libs/features/class/create/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/class/create/src/**/*.ts",
+              "libs/features/class/create/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
     "features-equipment-create": {
       "projectType": "library",
       "root": "libs/features/equipment/create",

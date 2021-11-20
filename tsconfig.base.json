@@ -65,6 +65,9 @@
       "@cheesecake-ui/features/calendar/create": [
         "libs/features/calendar/create/src/index.ts"
       ],
+      "@cheesecake-ui/features/class/create": [
+        "libs/features/class/create/src/index.ts"
+      ],
       "@cheesecake-ui/features/equipment/create": [
         "libs/features/equipment/create/src/index.ts"
       ],
