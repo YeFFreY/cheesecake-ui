@@ -72,6 +72,14 @@ export const uiApplicationShellRoutes: Route[] = [
       }
     ]
   },
+  {
+    path: 'classes', children: [
+      {
+        path: 'new',
+        loadChildren: async () => (await import('@cheesecake-ui/features/class/create')).FeaturesClassCreateModule
+      }
+    ]
+  },
 ];
 
 @NgModule({

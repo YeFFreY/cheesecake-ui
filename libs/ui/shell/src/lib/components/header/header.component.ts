@@ -8,7 +8,8 @@ import { HeaderFacadeService } from './header-facade.service';
     <div>
       <ul *ngIf='facade.authenticated$ | async' class='navigation'>
         <li><a routerLink='/app/activities' routerLinkActive='active'>Portfolio</a></li>
-        <li><a routerLink='/app/calendars/new' routerLinkActive='active'>Calendar</a></li>
+        <li><a routerLink='/app/calendars/new' routerLinkActive='active'>Calendars</a></li>
+        <li><a routerLink='/app/classes/new' routerLinkActive='active'>Schools</a></li>
       </ul>
     </div>
     <div class='profile'>
