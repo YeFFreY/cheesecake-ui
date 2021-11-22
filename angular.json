@@ -566,6 +566,58 @@
       },
       "tags": ["type:feature"]
     },
+    "features-calendar-course-create": {
+      "projectType": "library",
+      "root": "libs/features/calendar-course/create",
+      "sourceRoot": "libs/features/calendar-course/create/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/calendar-course/create"],
+          "options": {
+            "jestConfig": "libs/features/calendar-course/create/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/calendar-course/create/src/**/*.ts",
+              "libs/features/calendar-course/create/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
+    "features-calendar-course-details": {
+      "projectType": "library",
+      "root": "libs/features/calendar-course/details",
+      "sourceRoot": "libs/features/calendar-course/details/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/calendar-course/details"],
+          "options": {
+            "jestConfig": "libs/features/calendar-course/details/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/calendar-course/details/src/**/*.ts",
+              "libs/features/calendar-course/details/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
     "features-calendar-create": {
       "projectType": "library",
       "root": "libs/features/calendar/create",
@@ -586,6 +638,58 @@
             "lintFilePatterns": [
               "libs/features/calendar/create/src/**/*.ts",
               "libs/features/calendar/create/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
+    "features-calendar-details": {
+      "projectType": "library",
+      "root": "libs/features/calendar/details",
+      "sourceRoot": "libs/features/calendar/details/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/calendar/details"],
+          "options": {
+            "jestConfig": "libs/features/calendar/details/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/calendar/details/src/**/*.ts",
+              "libs/features/calendar/details/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
+    "features-calendar-list": {
+      "projectType": "library",
+      "root": "libs/features/calendar/list",
+      "sourceRoot": "libs/features/calendar/list/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/calendar/list"],
+          "options": {
+            "jestConfig": "libs/features/calendar/list/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/calendar/list/src/**/*.ts",
+              "libs/features/calendar/list/src/**/*.html"
             ]
           }
         }
@@ -822,6 +926,29 @@
         }
       },
       "tags": ["type:ui"]
+    },
+    "utils-constants": {
+      "root": "libs/utils/constants",
+      "sourceRoot": "libs/utils/constants/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/utils/constants/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/utils/constants"],
+          "options": {
+            "jestConfig": "libs/utils/constants/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     },
     "utils-form": {
       "projectType": "library",

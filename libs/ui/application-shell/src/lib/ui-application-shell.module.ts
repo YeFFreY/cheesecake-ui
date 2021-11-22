@@ -69,6 +69,10 @@ export const uiApplicationShellRoutes: Route[] = [
       {
         path: 'new',
         loadChildren: async () => (await import('@cheesecake-ui/features/calendar/create')).FeaturesCalendarCreateModule
+      },
+      {
+        path: '',
+        loadChildren: async () => (await import('@cheesecake-ui/features/calendar/list')).FeaturesCalendarListModule
       }
     ]
   },

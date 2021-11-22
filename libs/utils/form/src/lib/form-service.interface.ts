@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 export interface FormService<T> {
   readonly form: FormGroup;
@@ -13,7 +13,7 @@ export abstract class SimpleFormService<T> implements FormService<T> {
   readonly abstract form: FormGroup;
 
   get values$(): Observable<T> {
-    return this.form.valueChanges;
+    return this.form.valueChanges.pipe(map(this.mapper));
   }
 
   get validValue$(): Observable<T> {
@@ -28,5 +28,9 @@ export abstract class SimpleFormService<T> implements FormService<T> {
 
   patch(data: T): void {
     this.form.patchValue(data);
+  }
+
+  mapper(value: T): T {
+    return value;
   }
 }
