@@ -62,8 +62,20 @@
       "@cheesecake-ui/features/auth/login": [
         "libs/features/auth/login/src/index.ts"
       ],
+      "@cheesecake-ui/features/calendar-course/create": [
+        "libs/features/calendar-course/create/src/index.ts"
+      ],
+      "@cheesecake-ui/features/calendar-course/details": [
+        "libs/features/calendar-course/details/src/index.ts"
+      ],
       "@cheesecake-ui/features/calendar/create": [
         "libs/features/calendar/create/src/index.ts"
+      ],
+      "@cheesecake-ui/features/calendar/details": [
+        "libs/features/calendar/details/src/index.ts"
+      ],
+      "@cheesecake-ui/features/calendar/list": [
+        "libs/features/calendar/list/src/index.ts"
       ],
       "@cheesecake-ui/features/class/create": [
         "libs/features/class/create/src/index.ts"
@@ -86,6 +98,7 @@
         "libs/ui/application-shell/src/index.ts"
       ],
       "@cheesecake-ui/ui/shell": ["libs/ui/shell/src/index.ts"],
+      "@cheesecake-ui/utils/constants": ["libs/utils/constants/src/index.ts"],
       "@cheesecake-ui/utils/form": ["libs/utils/form/src/index.ts"]
     }
   },
