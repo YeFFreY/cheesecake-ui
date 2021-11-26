@@ -3,6 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 interface Option {
   id: unknown;
+  name?: string;
   description: string;
 }
 
@@ -20,7 +21,10 @@ interface Option {
         <div *ngFor='let option of options; trackBy: trackByOptionId'
              (click)='onClick(option)'
              class='selector-item'
-             [ngClass]='option.id === value ? "selected": ""'>{{option.description}}</div>
+             [ngClass]='option.id === value ? "selected": ""'>
+          <h4 *ngIf='option.name'>{{option.name}}</h4>
+          <p>{{option.description}}</p>
+        </div>
       </ng-template>
     </cc-drawer>
   `,
@@ -78,6 +82,12 @@ export class SelectorComponent implements ControlValueAccessor {
 
   private setLabel() {
     const selectedOption = this.options.find(option => option.id === this.value);
-    this.label = selectedOption ? selectedOption.description : 'Please select';
+    if (selectedOption && selectedOption.name) {
+      this.label = selectedOption.name;
+    } else if (selectedOption && selectedOption.description) {
+      this.label = selectedOption.description;
+    } else {
+      this.label = "Please select";
+    }
   }
 }

@@ -800,6 +800,32 @@
       },
       "tags": ["type:feature"]
     },
+    "shared-components-calendar": {
+      "projectType": "library",
+      "root": "libs/shared/components/calendar",
+      "sourceRoot": "libs/shared/components/calendar/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/components/calendar"],
+          "options": {
+            "jestConfig": "libs/shared/components/calendar/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/components/calendar/src/**/*.ts",
+              "libs/shared/components/calendar/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:ui"]
+    },
     "shared-components-drawer": {
       "projectType": "library",
       "root": "libs/shared/components/drawer",
