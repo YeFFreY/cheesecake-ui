@@ -87,6 +87,9 @@
       "@cheesecake-ui/features/skill/create": [
         "libs/features/skill/create/src/index.ts"
       ],
+      "@cheesecake-ui/shared/components/calendar": [
+        "libs/shared/components/calendar/src/index.ts"
+      ],
       "@cheesecake-ui/shared/components/drawer": [
         "libs/shared/components/drawer/src/index.ts"
       ],

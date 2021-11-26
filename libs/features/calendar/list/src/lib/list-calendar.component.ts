@@ -54,7 +54,7 @@ import { ListCalendarFacadeService } from './list-calendar-facade.service';
       .container {
         grid-gap              : var(--space-md);
         grid-template-areas   : "filter content";
-        grid-template-columns : 1fr 2fr;
+        grid-template-columns : 1fr 3fr;
       }
     }
   `],
