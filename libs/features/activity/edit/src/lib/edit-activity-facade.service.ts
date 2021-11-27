@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiService, handleInvalidRequest, InvalidRequestErrorItem, ResourceId } from '@cheesecake-ui/core/api';
+import { ApiService, handleInvalidRequest, RequestError, ResourceId } from '@cheesecake-ui/core/api';
 import { catchError, distinctUntilChanged, filter, map, sample, switchMap, withLatestFrom } from 'rxjs/operators';
 import { EditActivityCommand } from './edit-activity.domain';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
@@ -12,7 +12,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class EditActivityFacadeService {
   private submitSubject = new Subject<void>();
   private submittedSubject: Subject<ResourceId> = new Subject<ResourceId>();
-  private errorsSubject = new BehaviorSubject<{ summary: string, errors: InvalidRequestErrorItem[] } | null>(null);
+  private errorsSubject = new BehaviorSubject<RequestError | null>(null);
 
   private activityStore = new Subject<EditActivityCommand>();
   private idStore = new Subject<ResourceId>();

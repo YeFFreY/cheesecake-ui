@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import {
-  ApiService,
-  handleInvalidRequest,
-  InvalidRequestErrorItem,
-  Resource,
-  ResourceId
-} from '@cheesecake-ui/core/api';
+import { ApiService, handleInvalidRequest, RequestError, Resource, ResourceId } from '@cheesecake-ui/core/api';
 import { catchError, distinctUntilChanged, filter, map, sample, switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CreateActivityOperationFormService } from './create-activity-operation-form.service';
+
 
 export interface CreateActivityOperationCommand {
   activityId: ResourceId,
@@ -29,7 +24,7 @@ export class CreateActivityOperationFacadeService {
   private operationTypesStore = new BehaviorSubject<OperationType[]>([]);
   private submitSubject = new Subject<void>();
   private submittedSubject = new Subject<ResourceId>();
-  private errorsSubject = new BehaviorSubject<{ summary: string, errors: InvalidRequestErrorItem[] } | null>(null);
+  private errorsSubject = new BehaviorSubject<RequestError | null>(null);
 
   private criteria$ = this.criteriaStore.asObservable().pipe(distinctUntilChanged());
   private operationTypes$ = this.operationTypesStore.asObservable().pipe(distinctUntilChanged());

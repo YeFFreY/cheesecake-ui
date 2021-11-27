@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { ApiService, handleInvalidRequest, InvalidRequestErrorItem, ResourceId } from '@cheesecake-ui/core/api';
+import { ApiService, handleInvalidRequest, RequestError, ResourceId } from '@cheesecake-ui/core/api';
 import { catchError, filter, map, sample, switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CreateEquipmentFormService } from './create-equipment-form.service';
@@ -16,7 +16,7 @@ export interface CreateEquipmentCommand {
 export class CreateEquipmentFacadeService {
   private submitSubject = new Subject<void>();
   private submittedSubject = new Subject<ResourceId>();
-  private errorsSubject = new BehaviorSubject<{ summary: string, errors: InvalidRequestErrorItem[] } | null>(null);
+  private errorsSubject = new BehaviorSubject<RequestError | null>(null);
 
   private submit$ = this.submitSubject.asObservable();
   private errors$ = this.errorsSubject.asObservable();
@@ -37,7 +37,7 @@ export class CreateEquipmentFacadeService {
       switchMap(command => this.create(command)),
       untilDestroyed(this)
     ).subscribe((result) => {
-      this.submittedSubject.next(result.data)
+      this.submittedSubject.next(result.data);
     });
   }
 

@@ -19,6 +19,11 @@ export interface NetworkError {
 
 export type InvalidRequestErrorItem = { path: string, message: string };
 
+export interface RequestError {
+  summary: string,
+  errors: InvalidRequestErrorItem[]
+}
+
 export interface InvalidRequest {
   readonly type: 'InvalidRequest',
   errors: InvalidRequestErrorItem[]

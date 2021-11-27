@@ -80,6 +80,9 @@
       "@cheesecake-ui/features/class/create": [
         "libs/features/class/create/src/index.ts"
       ],
+      "@cheesecake-ui/features/course-activity/create": [
+        "libs/features/course-activity/create/src/index.ts"
+      ],
       "@cheesecake-ui/features/equipment/create": [
         "libs/features/equipment/create/src/index.ts"
       ],
