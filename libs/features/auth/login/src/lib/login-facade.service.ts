@@ -6,7 +6,7 @@ import {
   ApiService,
   handleAuthenticationError,
   handleInvalidRequest,
-  InvalidRequestErrorItem,
+  RequestError,
   Resource
 } from '@cheesecake-ui/core/api';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -21,7 +21,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LoginFacadeService {
 
   private submitSubject = new BehaviorSubject<boolean>(false);
-  private errorsSubject = new BehaviorSubject<{ summary: string, errors: InvalidRequestErrorItem[] } | null>(null);
+  private errorsSubject = new BehaviorSubject<RequestError | null>(null);
 
   private submit$: Observable<boolean> = this.submitSubject.asObservable();
   private errors$ = this.errorsSubject.asObservable();

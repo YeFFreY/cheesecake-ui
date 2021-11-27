@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ApiService, handleInvalidRequest, InvalidRequestErrorItem, ResourceId } from '@cheesecake-ui/core/api';
+import { ApiService, handleInvalidRequest, RequestError, ResourceId } from '@cheesecake-ui/core/api';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { catchError, filter, map, sample, switchMap } from 'rxjs/operators';
 import { CreateCalendarFormService } from './create-calendar-form.service';
@@ -16,7 +16,7 @@ export interface CreateCalendarCommand {
 export class CreateCalendarFacadeService {
   private submitSubject = new Subject<void>();
   private submittedSubject = new Subject<ResourceId>();
-  private errorsSubject = new BehaviorSubject<{ summary: string, errors: InvalidRequestErrorItem[] } | null>(null);
+  private errorsSubject = new BehaviorSubject<RequestError | null>(null);
 
   private submit$ = this.submitSubject.asObservable();
   private errors$ = this.errorsSubject.asObservable();
