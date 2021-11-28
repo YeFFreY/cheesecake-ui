@@ -17,15 +17,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
         </div>
         <h2>Course to {{vm.course.classOverview.name}}</h2>
       </div>
-      <button (click)='openAddActivityDrawer()' class='button' id='btn-add-activity'>Add activity</button>
-      <cc-drawer [isOpen]='open' (drawerClosed)='open = false'>
-        <ng-template ccDrawerHeader>
-          <div ><h3>Add activity</h3></div>
-        </ng-template>
-        <ng-template ccDrawerBody>
-          <cc-create-course-activity [courseId]='vm.course.id' (activityAdded)='onActivityAdded()'></cc-create-course-activity>
-        </ng-template>
-      </cc-drawer>
+      <cc-list-course-activity [courseId]='vm.course.id'></cc-list-course-activity>
+
     </div>
   `,
   styles: [`
@@ -43,7 +36,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   providers: [DetailsCourseFacadeService]
 })
 export class DetailsCourseComponent {
-  public open = false;
   dateFormat = outputDateDayFormat;
   timeFormat = outputDateTimeFormat;
 
@@ -55,16 +47,4 @@ export class DetailsCourseComponent {
     });
   }
 
-
-  public openAddActivityDrawer() {
-    this.open = true;
-  }
-
-  private closeAddActivityDrawer() {
-    this.open = false;
-  }
-
-  onActivityAdded() {
-    this.closeAddActivityDrawer()
-  }
 }
