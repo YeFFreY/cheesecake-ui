@@ -748,6 +748,32 @@
       },
       "tags": ["type:feature"]
     },
+    "features-course-activity-list": {
+      "projectType": "library",
+      "root": "libs/features/course-activity/list",
+      "sourceRoot": "libs/features/course-activity/list/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/course-activity/list"],
+          "options": {
+            "jestConfig": "libs/features/course-activity/list/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/course-activity/list/src/**/*.ts",
+              "libs/features/course-activity/list/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
     "features-equipment-create": {
       "projectType": "library",
       "root": "libs/features/equipment/create",
@@ -1027,6 +1053,29 @@
         }
       },
       "tags": ["type:util"]
+    },
+    "utils-locheese": {
+      "root": "libs/utils/locheese",
+      "sourceRoot": "libs/utils/locheese/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/utils/locheese/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/utils/locheese"],
+          "options": {
+            "jestConfig": "libs/utils/locheese/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     }
   }
 }

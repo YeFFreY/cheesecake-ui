@@ -2,17 +2,18 @@ import { DetailsCourseComponent } from './details-course.component';
 import { createRoutingFactory, mockProvider, Spectator } from '@ngneat/spectator/jest';
 import { DetailsCourseFacadeService } from './details-course-facade.service';
 import { of } from 'rxjs';
-import { SharedComponentsDrawerModule } from '@cheesecake-ui/shared/components/drawer';
+import { MockComponent } from 'ng-mocks';
+import { ListCourseActivityComponent } from '@cheesecake-ui/features/course-activity/list';
 
 describe('DetailsCourseComponent', () => {
   let spectator: Spectator<DetailsCourseComponent>;
   const createComponent = createRoutingFactory({
     component: DetailsCourseComponent,
     params: { calendarId: '1' },
-    imports: [SharedComponentsDrawerModule],
+    declarations: [MockComponent(ListCourseActivityComponent)],
     componentProviders: [
       mockProvider(DetailsCourseFacadeService, {
-        vm$: of({ course: { classOverview: {id: '1', name: 'class'}, start: '01/01/2021', end: '01/01/2021' } })
+        vm$: of({ course: { classOverview: { id: '1', name: 'class' }, start: '01/01/2021', end: '01/01/2021' } })
       })
     ]
   });
