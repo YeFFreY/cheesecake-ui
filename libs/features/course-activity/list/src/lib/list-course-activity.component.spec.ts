@@ -3,12 +3,15 @@ import { createComponentFactory, mockProvider, Spectator } from '@ngneat/spectat
 import { SharedComponentsDrawerModule } from '@cheesecake-ui/shared/components/drawer';
 import { of } from 'rxjs';
 import { CourseActivity, ListCourseActivityFacadeService, Section } from './list-course-activity-facade.service';
+import { MockComponent } from 'ng-mocks';
+import { DeleteCourseActivityComponent } from '@cheesecake-ui/features/course-activity/delete';
 
 describe('ListCourseActivityComponent', () => {
   let spectator: Spectator<ListCourseActivityComponent>;
   const createComponent = createComponentFactory({
     component: ListCourseActivityComponent,
     imports: [SharedComponentsDrawerModule],
+    declarations: [MockComponent(DeleteCourseActivityComponent)],
     componentProviders: [
       mockProvider(ListCourseActivityFacadeService, {
         vm$: of({
@@ -41,6 +44,7 @@ describe('ListCourseActivityComponent', () => {
   it('should display course activities list and add activity button', () => {
     expect(spectator.queryAll('.section-item')).toHaveLength(2);
     expect(spectator.queryAll('.activity-item')).toHaveLength(3);
+    expect(spectator.queryAll('cc-delete-course-activity')).toHaveLength(3);
     expect(spectator.query('#btn-add-activity')).toHaveText('Add activity');
   });
 });

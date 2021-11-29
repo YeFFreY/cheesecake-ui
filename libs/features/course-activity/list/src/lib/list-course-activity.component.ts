@@ -12,7 +12,13 @@ import { ResourceId } from '@cheesecake-ui/core/api';
         <h4>{{section.sectionDescription}}</h4>
         <ul>
           <li *ngFor='let activity of section.activities; trackBy: trackByActivityId'
-              class='activity-item'>{{activity.activityName}}</li>
+              class='activity-item'>
+            <div>{{activity.activityName}}</div>
+            <cc-delete-course-activity [courseId]='courseId'
+                                       [activityId]='activity.activityId'
+                                       [sectionTypeId]='section.sectionTypeId'
+                                       (activityDeleted)='onActivityDeleted()'></cc-delete-course-activity>
+          </li>
         </ul>
 
       </div>
@@ -28,7 +34,12 @@ import { ResourceId } from '@cheesecake-ui/core/api';
       </ng-template>
     </cc-drawer>
   `,
-  styles: [],
+  styles: [`
+    .activity-item {
+      display : flex;
+      gap     : var(--space-md);
+    }
+  `],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ListCourseActivityFacadeService]
 })
@@ -57,6 +68,10 @@ export class ListCourseActivityComponent implements OnChanges {
 
   onActivityAdded() {
     this.closeAddActivityDrawer();
+    this.refreshCourseActivities();
+  }
+
+  onActivityDeleted() {
     this.refreshCourseActivities();
   }
 
