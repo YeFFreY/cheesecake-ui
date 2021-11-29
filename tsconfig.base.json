@@ -83,6 +83,9 @@
       "@cheesecake-ui/features/course-activity/create": [
         "libs/features/course-activity/create/src/index.ts"
       ],
+      "@cheesecake-ui/features/course-activity/delete": [
+        "libs/features/course-activity/delete/src/index.ts"
+      ],
       "@cheesecake-ui/features/course-activity/list": [
         "libs/features/course-activity/list/src/index.ts"
       ],

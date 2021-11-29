@@ -748,6 +748,32 @@
       },
       "tags": ["type:feature"]
     },
+    "features-course-activity-delete": {
+      "projectType": "library",
+      "root": "libs/features/course-activity/delete",
+      "sourceRoot": "libs/features/course-activity/delete/src",
+      "prefix": "cc",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/course-activity/delete"],
+          "options": {
+            "jestConfig": "libs/features/course-activity/delete/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/course-activity/delete/src/**/*.ts",
+              "libs/features/course-activity/delete/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["type:feature"]
+    },
     "features-course-activity-list": {
       "projectType": "library",
       "root": "libs/features/course-activity/list",
